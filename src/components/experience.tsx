@@ -8,7 +8,7 @@ const experiences = [
     company: "EmployeeLife",
     role: "Training Learner",
     description: "fixing security holes , and making endpoint work better.Used the best security practice to make sure that data integrity and authentication and authentication weren all in place .Develope system-level and command-line skill by Linux for scripting server configuration and security testing ",
-    image: "https://picsum.photos/seed/employeelife/800/400"
+    image: "/ExperienceImage/Intern1.jpeg"
   }
 ];
 

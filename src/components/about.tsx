@@ -56,7 +56,7 @@ export default function About() {
             
             <div className="relative z-10 grayscale hover:grayscale-0 transition-all duration-700 aspect-[4/5] bg-gray-900 overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=2070&auto=format&fit=crop"
+                src="/Images/about_image.jpeg"
                 alt="Developer working with coffee"
                 className="w-full h-full object-cover"
               />
