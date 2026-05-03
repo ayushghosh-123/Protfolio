@@ -24,7 +24,7 @@ export default function Footer() {
               onClick={handleSecretClick}
               className="text-5xl font-black tracking-tighter text-white mb-6 block cursor-pointer select-none"
             >
-              PORT<span className="text-[#FF5722]">FOLIO</span>
+              Ghosh<span className="text-[#FF5722]">Developer</span>
             </Link>
             <p className="text-gray-500 max-w-xs font-bold uppercase text-[10px] tracking-[0.2em] leading-relaxed">
               Modern digital experiences crafted with precision and bold aesthetics.
@@ -32,10 +32,10 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-wrap gap-x-12 gap-y-6">
-            <Link href="#about" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">About</Link>
-            <Link href="#skills" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Skills</Link>
-            <Link href="#projects" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Projects</Link>
-            <Link href="#contact" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Contact</Link>
+            <Link href="/about" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">About</Link>
+            <Link href="/skills" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Skills</Link>
+            <Link href="/projects" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Projects</Link>
+            <Link href="/contact" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Contact</Link>
           </div>
         </div>
 
