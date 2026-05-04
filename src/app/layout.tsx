@@ -10,7 +10,7 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Alex Dev | UI/UX & Full Stack",
+  title: "Ayush Ghosh | Agentic AI & Full Stack",
   description: "Modern portfolio of a Full Stack Designer & Developer",
 };
 

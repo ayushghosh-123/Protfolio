@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const experiences = [
   {
     year: "Sep, 2024 - Nov, 2024",
-    company: "EmployeeLife",
+    company: "Employability.Life",
     role: "Training Learner",
     description: "fixing security holes , and making endpoint work better.Used the best security practice to make sure that data integrity and authentication and authentication weren all in place .Develope system-level and command-line skill by Linux for scripting server configuration and security testing ",
     image: "/ExperienceImage/Intern1.jpeg"
