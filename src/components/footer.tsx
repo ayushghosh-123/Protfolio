@@ -24,7 +24,7 @@ export default function Footer() {
               onClick={handleSecretClick}
               className="text-5xl font-black tracking-tighter text-white mb-6 block cursor-pointer select-none"
             >
-              Ghosh<span className="text-[#FF5722]">Developer</span>
+              A<span className="text-[#FF5722]">G</span>
             </Link>
             <p className="text-gray-500 max-w-xs font-bold uppercase text-[10px] tracking-[0.2em] leading-relaxed">
               Modern digital experiences crafted with precision and bold aesthetics.
@@ -37,12 +37,6 @@ export default function Footer() {
             <Link href="/projects" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Projects</Link>
             <Link href="/contact" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Contact</Link>
           </div>
-        </div>
-
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between gap-6 items-center">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-gray-600 font-black">
-            © {new Date().getFullYear()} ALEX DEV — ALL RIGHTS RESERVED
-          </p>
         </div>
       </div>
     </footer>
