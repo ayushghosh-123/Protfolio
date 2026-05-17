@@ -9,7 +9,11 @@ export default function AdminPage() {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(false);
 
-  const [formData, setFormData] = useState({
+  // Tab State: Toggle between projects & blogs
+  const [activeTab, setActiveTab] = useState<'project' | 'blog'>('project');
+
+  // Project Form State
+  const [projectFormData, setProjectFormData] = useState({
     title: '',
     description: '',
     longDescription: '',
@@ -18,6 +22,17 @@ export default function AdminPage() {
     githubLink: '',
     featured: false,
   });
+
+  // Blog Form State
+  const [blogFormData, setBlogFormData] = useState({
+    title: '',
+    summary: '',
+    category: '',
+    watchUrl: '',
+    readTime: '5 MIN READ',
+    tags: '',
+  });
+
   const [image, setImage] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -25,7 +40,6 @@ export default function AdminPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, you'd check this via an API. For now, we'll send it with every request.
     if (password.length > 0) {
       setIsAuthenticated(true);
       setLoginError(false);
@@ -34,11 +48,19 @@ export default function AdminPage() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleProjectInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
-    setFormData((prev) => ({
+    setProjectFormData((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
+    }));
+  };
+
+  const handleBlogInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setBlogFormData((prev) => ({
+      ...prev,
+      [name]: value,
     }));
   };
 
@@ -50,28 +72,41 @@ export default function AdminPage() {
     }
   };
 
+  const handleTabChange = (tab: 'project' | 'blog') => {
+    setActiveTab(tab);
+    setStatus(null);
+    setImage(null);
+    setPreview(null);
+  };
+
+  // Submit flow
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
 
     if (!image) {
-      setStatus({ type: 'error', message: 'Please select an image' });
+      setStatus({ type: 'error', message: 'Please select an image cover' });
       setLoading(false);
       return;
     }
 
     const uploadData = new FormData();
     uploadData.append('image', image);
-    Object.entries(formData).forEach(([key, value]) => {
+
+    const isProject = activeTab === 'project';
+    const targetUrl = isProject ? '/api/projects/upload' : '/api/blogs/upload';
+    const currentForm = isProject ? projectFormData : blogFormData;
+
+    Object.entries(currentForm).forEach(([key, value]) => {
       uploadData.append(key, String(value));
     });
 
     try {
-      const response = await fetch('/api/projects/upload', {
+      const response = await fetch(targetUrl, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${password}`, // Sending the password as the token
+          'Authorization': `Bearer ${password}`,
         },
         body: uploadData,
       });
@@ -79,16 +114,32 @@ export default function AdminPage() {
       const result = await response.json();
 
       if (response.ok) {
-        setStatus({ type: 'success', message: 'Project uploaded successfully!' });
-        setFormData({
-          title: '',
-          description: '',
-          longDescription: '',
-          tags: '',
-          liveLink: '',
-          githubLink: '',
-          featured: false,
+        setStatus({ 
+          type: 'success', 
+          message: `${isProject ? 'Project' : 'Blog post'} uploaded successfully!` 
         });
+        
+        // Reset states
+        if (isProject) {
+          setProjectFormData({
+            title: '',
+            description: '',
+            longDescription: '',
+            tags: '',
+            liveLink: '',
+            githubLink: '',
+            featured: false,
+          });
+        } else {
+          setBlogFormData({
+            title: '',
+            summary: '',
+            category: '',
+            watchUrl: '',
+            readTime: '5 MIN READ',
+            tags: '',
+          });
+        }
         setImage(null);
         setPreview(null);
       } else {
@@ -143,14 +194,37 @@ export default function AdminPage() {
   return (
     <main className="min-h-screen bg-black text-white pt-32 pb-20 px-6">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="mb-16">
-          <span className="text-[#FF5722] font-black tracking-[0.3em] uppercase text-sm mb-4 block">
-            Dashboard
-          </span>
-          <h1 className="text-5xl md:text-7xl font-black uppercase leading-none">
-            Upload <span className="text-transparent" style={{ WebkitTextStroke: '1px white' }}>Project</span>
-          </h1>
+        
+        {/* Toggle tabs and Title Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 border-b border-white/10 pb-8">
+          <div>
+            <span className="text-[#FF5722] font-black tracking-[0.3em] uppercase text-sm mb-4 block">
+              Dashboard
+            </span>
+            <h1 className="text-5xl md:text-7xl font-black uppercase leading-none">
+              Upload <span className="text-transparent" style={{ WebkitTextStroke: '1px white' }}>{activeTab === 'project' ? 'Project' : 'Blog'}</span>
+            </h1>
+          </div>
+
+          {/* Selector Tabs */}
+          <div className="flex bg-[#111] border border-white/5 rounded-full p-1.5 shrink-0">
+            <button
+              onClick={() => handleTabChange('project')}
+              className={`px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${
+                activeTab === 'project' ? 'bg-[#FF5722] text-white' : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              Projects
+            </button>
+            <button
+              onClick={() => handleTabChange('blog')}
+              className={`px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${
+                activeTab === 'blog' ? 'bg-[#FF5722] text-white' : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              Blogs
+            </button>
+          </div>
         </div>
 
         {/* Status Message */}
@@ -168,86 +242,166 @@ export default function AdminPage() {
         )}
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Left Side: Details */}
-          <div className="space-y-8">
-            <div className="space-y-2">
-              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Project Title</label>
-              <input
-                required
-                name="title"
-                value={formData.title}
-                onChange={handleInputChange}
-                className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors font-bold uppercase text-xl"
-                placeholder="E.G. AI DASHBOARD"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Short Description</label>
-              <textarea
-                required
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors font-medium text-gray-400 resize-none"
-                placeholder="A brief overview of the project..."
-                rows={3}
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-8">
+          {/* Project Form Render */}
+          {activeTab === 'project' ? (
+            <div className="space-y-8">
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Live Link</label>
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Project Title</label>
                 <input
-                  name="liveLink"
-                  value={formData.liveLink}
-                  onChange={handleInputChange}
-                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm"
-                  placeholder="https://..."
+                  required
+                  name="title"
+                  value={projectFormData.title}
+                  onChange={handleProjectInputChange}
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors font-bold uppercase text-xl"
+                  placeholder="E.G. AI DASHBOARD"
                 />
               </div>
+
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">GitHub Link</label>
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Short Description</label>
+                <textarea
+                  required
+                  name="description"
+                  value={projectFormData.description}
+                  onChange={handleProjectInputChange}
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors font-medium text-gray-400 resize-none"
+                  placeholder="A brief overview of the project..."
+                  rows={3}
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Live Link</label>
+                  <input
+                    name="liveLink"
+                    value={projectFormData.liveLink}
+                    onChange={handleProjectInputChange}
+                    className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm"
+                    placeholder="https://..."
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">GitHub Link</label>
+                  <input
+                    name="githubLink"
+                    value={projectFormData.githubLink}
+                    onChange={handleProjectInputChange}
+                    className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm"
+                    placeholder="https://github.com/..."
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Tags (Comma separated)</label>
                 <input
-                  name="githubLink"
-                  value={formData.githubLink}
-                  onChange={handleInputChange}
-                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm"
-                  placeholder="https://github.com/..."
+                  name="tags"
+                  value={projectFormData.tags}
+                  onChange={handleProjectInputChange}
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm uppercase tracking-widest"
+                  placeholder="REACT, NODE, NEXTJS"
+                />
+              </div>
+
+              <label className="flex items-center gap-4 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  name="featured"
+                  checked={projectFormData.featured}
+                  onChange={(e) => setProjectFormData(prev => ({ ...prev, featured: e.target.checked }))}
+                  className="hidden"
+                />
+                <div className={`w-6 h-6 border-2 transition-all flex items-center justify-center ${projectFormData.featured ? 'bg-[#FF5722] border-[#FF5722]' : 'border-white/20'}`}>
+                  {projectFormData.featured && <CheckCircle2 size={16} className="text-white" />}
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-widest group-hover:text-[#FF5722] transition-colors">Mark as Featured Work</span>
+              </label>
+            </div>
+          ) : (
+            /* Blog Form Render */
+            <div className="space-y-8">
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Blog Title</label>
+                <input
+                  required
+                  name="title"
+                  value={blogFormData.title}
+                  onChange={handleBlogInputChange}
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors font-bold uppercase text-xl"
+                  placeholder="E.G. THE RISE OF AGENTIC AI"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Blog Summary</label>
+                <textarea
+                  required
+                  name="summary"
+                  value={blogFormData.summary}
+                  onChange={handleBlogInputChange}
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors font-medium text-gray-400 resize-none"
+                  placeholder="Write a clear, brief summary of what the reader learns..."
+                  rows={4}
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Category</label>
+                  <input
+                    required
+                    name="category"
+                    value={blogFormData.category}
+                    onChange={handleBlogInputChange}
+                    className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm uppercase tracking-widest font-bold"
+                    placeholder="AI TOOLS, UI/UX, DEV"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Read Time</label>
+                  <input
+                    required
+                    name="readTime"
+                    value={blogFormData.readTime}
+                    onChange={handleBlogInputChange}
+                    className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm font-bold"
+                    placeholder="5 MIN READ"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Final Link to Watch / Read</label>
+                <input
+                  required
+                  name="watchUrl"
+                  value={blogFormData.watchUrl}
+                  onChange={handleBlogInputChange}
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm text-[#FF5722] font-semibold"
+                  placeholder="https://youtu.be/..."
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Tags (Comma separated)</label>
+                <input
+                  name="tags"
+                  value={blogFormData.tags}
+                  onChange={handleBlogInputChange}
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm uppercase tracking-widest"
+                  placeholder="AGENTICAI, DEVTOOLS, CODING"
                 />
               </div>
             </div>
+          )}
 
-            <div className="space-y-2">
-              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Tags (Comma separated)</label>
-              <input
-                name="tags"
-                value={formData.tags}
-                onChange={handleInputChange}
-                className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm uppercase tracking-widest"
-                placeholder="REACT, NODE, NEXTJS"
-              />
-            </div>
-
-            <label className="flex items-center gap-4 cursor-pointer group">
-              <input
-                type="checkbox"
-                name="featured"
-                checked={formData.featured}
-                onChange={(e) => setFormData(prev => ({ ...prev, featured: e.target.checked }))}
-                className="hidden"
-              />
-              <div className={`w-6 h-6 border-2 transition-all flex items-center justify-center ${formData.featured ? 'bg-[#FF5722] border-[#FF5722]' : 'border-white/20'}`}>
-                {formData.featured && <CheckCircle2 size={16} className="text-white" />}
-              </div>
-              <span className="text-[10px] font-black uppercase tracking-widest group-hover:text-[#FF5722] transition-colors">Mark as Featured Work</span>
-            </label>
-          </div>
-
-          {/* Right Side: Image Upload */}
+          {/* Right Side: Image Upload & Submit button */}
           <div className="space-y-8">
             <div className="space-y-2">
-              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Project Image</label>
+              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">
+                {activeTab === 'project' ? 'Project Preview Image' : 'Blog Cover Image'}
+              </label>
               <div 
                 className={`relative aspect-video border-2 border-dashed transition-all flex flex-col items-center justify-center gap-4 overflow-hidden group ${
                   preview ? 'border-[#FF5722]/50' : 'border-white/10 hover:border-[#FF5722]/30'
@@ -291,7 +445,7 @@ export default function AdminPage() {
                 </>
               ) : (
                 <>
-                  Post Project
+                  Post {activeTab === 'project' ? 'Project' : 'Blog Post'}
                   <Upload size={18} />
                 </>
               )}

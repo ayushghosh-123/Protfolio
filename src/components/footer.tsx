@@ -35,6 +35,7 @@ export default function Footer() {
             <Link href="/about" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">About</Link>
             <Link href="/skills" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Skills</Link>
             <Link href="/projects" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Projects</Link>
+            <Link href="/blog" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Blog</Link>
             <Link href="/contact" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Contact</Link>
           </div>
         </div>
