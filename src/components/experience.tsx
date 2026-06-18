@@ -15,7 +15,7 @@ const experiences = [
     company: "Freelancer (Fiverr)",
     role: "Freelance Software Developer",
     period: "Feb 2021 - Feb 2025",
-    image: "/ExperienceImage/Intern1.jpeg",
+    image: "/ExperienceImage/EmpLife_Fed_Logo.png",
     badge: null,
   },
 ];
