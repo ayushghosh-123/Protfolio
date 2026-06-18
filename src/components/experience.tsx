@@ -22,7 +22,7 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 bg-[#0A0A0A] text-white overflow-hidden">
+    <section id="experience" className="py-10 bg-[#0A0A0A] text-white overflow-hidden">
       <div className="max-w-4xl mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <motion.h2

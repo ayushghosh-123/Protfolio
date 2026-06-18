@@ -83,7 +83,7 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-32 bg-[#0A0A0A] text-white">
+    <section id="skills" className="py-12 bg-[#0A0A0A] text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
@@ -93,11 +93,8 @@ export default function Skills() {
               <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Stack & Expertise</span>
             </div>
             <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tight leading-none mb-8">
-              Technical <span className="text-gradient">Ecosystem</span>
+              Skills
             </h2>
-            <p className="text-zinc-500 text-lg md:text-xl font-medium leading-relaxed max-w-2xl">
-              I leverage a premium selection of modern tools to build applications that are as beautiful on the inside as they are on the outside.
-            </p>
           </div>
         </div>
 

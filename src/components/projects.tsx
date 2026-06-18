@@ -44,7 +44,7 @@ export default function Projects() {
               <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Portfolio</span>
             </div>
             <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tight leading-none mb-8">
-              Selected <span className="text-gradient">Artifacts</span>
+              My Projects
             </h2>
             <p className="text-zinc-500 text-lg md:text-xl font-medium leading-relaxed max-w-2xl">
               A curated collection of digital experiences, AI agents, and engineering solutions built for performance.
@@ -76,7 +76,7 @@ export default function Projects() {
                 {/* Image Container */}
                 <div className="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden border border-white/10 bg-zinc-900 mb-8 shadow-2xl transition-all duration-700 group-hover:shadow-[0_0_80px_rgba(139,92,246,0.15)]">
                   <Image
-                    src={project.imageUrl || "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1200&q=80"}
+                    src={project.imageUrl}
                     alt={project.title}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

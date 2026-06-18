@@ -40,7 +40,7 @@ const capabilities = [
 
 export default function About() {
   return (
-    <section id="about" className="py-32 bg-[#0A0A0A] text-white relative overflow-hidden">
+    <section id="about" className="py-22 bg-[#0A0A0A] text-white relative overflow-hidden">
       {/* Decorative Blur Backdrops */}
       <div className="absolute top-1/4 -right-10 w-80 h-80 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 -left-10 w-80 h-80 bg-accent/10 rounded-full blur-[120px] pointer-events-none" />
@@ -166,22 +166,6 @@ export default function About() {
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* Action Callouts */}
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Link 
-                href="/projects" 
-                className="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-[10px] rounded-full hover:bg-primary hover:text-white transition-all duration-300 flex items-center gap-2"
-              >
-                Inspect Portfolio
-              </Link>
-              <Link 
-                href="/contact" 
-                className="px-8 py-4 bg-transparent border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] rounded-full hover:bg-white/5 transition-all"
-              >
-                Get in Touch
-              </Link>
             </div>
 
           </motion.div>
