@@ -1,24 +1,19 @@
 "use client";
 
-import * as React from "react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { motion } from "framer-motion";
 
-if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-  const origError = console.error;
-  console.error = (...args) => {
-    if (
-      typeof args[0] === "string" &&
-      args[0].includes("Encountered a script tag while rendering React component")
-    ) {
-      return;
-    }
-    origError(...args);
-  };
-}
-
-export function ThemeProvider({
+export default function ThemeProvider({ 
   children,
-  ...props
-}: React.ComponentProps<typeof NextThemesProvider>) {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+  ...props 
+}: { 
+  children: React.ReactNode,
+  [key: string]: any 
+}) {
+  // We can add global motion or theme logic here if needed
+  // For now, it's a simple wrapper to ensure client-side rendering for motion components
+  return (
+    <div {...props}>
+      {children}
+    </div>
+  );
 }

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { motion, Variants } from 'framer-motion';
-import { ExternalLink, Loader, AlertCircle } from 'lucide-react';
-import { FaGithub } from 'react-icons/fa6';
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { ExternalLink, Layers, ArrowUpRight, Loader2 } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
+import Image from "next/image";
 
-// interface for projects
 interface Project {
   _id: string;
   title: string;
@@ -19,245 +19,125 @@ interface Project {
   createdAt: string;
 }
 
-// projects component
 export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [filter, setFilter] = useState('all');
 
-  // fetch projects on mount
   useEffect(() => {
-    fetchProjects();
+    fetch("/api/projects")
+      .then((res) => res.json())
+      .then((data) => {
+        setProjects(data.data || []);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
 
-  // fetch projects 
-  const fetchProjects = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const response = await fetch('/api/projects', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch projects: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      setProjects(data.data || []);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load projects');
-      console.error('Error fetching projects:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Get unique tags from all projects
-  const allTags = ['all', ...new Set(projects.flatMap(p => p.tags))];
-
-  // Filter projects based on selected tag
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : projects.filter(p => p.tags.includes(filter));
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: 'easeOut' },
-    },
-  };
-
-  const tagVariants: Variants = {
-    hidden: { opacity: 0, x: -10 },
-    visible: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: { delay: i * 0.05 },
-    }),
-  };
-
-  if (error) {
-    return (
-      <motion.section 
-        id="projects"
-        className="min-h-screen bg-black px-6 py-24"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-center gap-3 bg-white/5 border border-[#FF5722]/50 rounded-lg p-6 text-white">
-            <AlertCircle size={20} className="text-[#FF5722]" />
-            <p className="font-bold uppercase tracking-tight">{error}</p>
-          </div>
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={fetchProjects}
-              className="px-8 py-3 bg-[#FF5722] text-white font-black uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all"
-            >
-              Try Again
-            </button>
-          </div>
-        </div>
-      </motion.section>
-    );
-  }
-
   return (
-    <motion.section
-      id="projects"
-      className="min-h-screen bg-black text-white px-6 py-32 overflow-hidden"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-    >
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="py-32 bg-[#0A0A0A] text-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Section Header */}
-        <div className="text-center mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="text-[#FF5722] font-black tracking-[0.3em] uppercase text-sm mb-4 block">
-              Portfolio
-            </span>
-            <h2 className="text-5xl md:text-8xl font-black uppercase leading-none">
-              My <span className="text-transparent" style={{ WebkitTextStroke: '1px white' }}>Projects</span>
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10 mb-8">
+              <Layers size={12} className="text-primary" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Portfolio</span>
+            </div>
+            <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tight leading-none mb-8">
+              Selected <span className="text-gradient">Artifacts</span>
             </h2>
-          </motion.div>
+            <p className="text-zinc-500 text-lg md:text-xl font-medium leading-relaxed max-w-2xl">
+              A curated collection of digital experiences, AI agents, and engineering solutions built for performance.
+            </p>
+          </div>
+          
+          <button className="flex items-center gap-3 px-8 py-4 rounded-full glass border-white/10 text-[10px] font-bold uppercase tracking-widest hover:bg-white/5 transition-colors group">
+            All Repositories
+            <FaGithub size={14} className="group-hover:rotate-12 transition-transform" />
+          </button>
         </div>
 
-        {/* Tag Filter removed per user request */}
-
-        {/* Loading State */}
-        {loading && (
-          <div className="flex flex-col items-center justify-center py-40 gap-6">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-            >
-              <Loader size={48} className="text-[#FF5722]" />
-            </motion.div>
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">
-              Fetching Works...
-            </span>
+        {/* Projects Bento Grid Concept */}
+        {loading ? (
+          <div className="flex items-center justify-center py-40">
+            <Loader2 className="animate-spin text-primary" size={40} />
           </div>
-        )}
-
-        {/* Projects Grid */}
-        {!loading && (
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-20"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {filteredProjects.map((project) => (
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
+            {projects.map((project, idx) => (
               <motion.div
                 key={project._id}
-                variants={itemVariants}
-                className="group relative flex flex-col"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative"
               >
                 {/* Image Container */}
-                <div className="relative aspect-video overflow-hidden transition-all duration-700 mb-8 border border-white/5 group-hover:border-[#FF5722]/30">
-                  <motion.img
-                    src={project.imageUrl}
+                <div className="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden border border-white/10 bg-zinc-900 mb-8 shadow-2xl transition-all duration-700 group-hover:shadow-[0_0_80px_rgba(139,92,246,0.15)]">
+                  <Image
+                    src={project.imageUrl || "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1200&q=80"}
                     alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&q=80';
-                    }}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-all duration-1000 scale-105 group-hover:scale-100 grayscale-[0.3] group-hover:grayscale-0"
                   />
-                  {/* Featured badge removed from here */}
-                </div>
-
-                {/* Content */}
-                <div className="flex flex-col items-start">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[#FF5722] text-[10px] font-black uppercase tracking-widest"
-                      >
-                        #{tag}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity" />
+                  
+                  {/* Floating Tech Tags in Image */}
+                  <div className="absolute top-6 left-6 flex flex-wrap gap-2">
+                    {project.tags.slice(0, 3).map(tag => (
+                      <span key={tag} className="px-3 py-1 rounded-lg glass border-white/10 text-[9px] font-bold uppercase tracking-widest text-white/80">
+                        {tag}
                       </span>
                     ))}
                   </div>
-
-                  <h3 className="text-3xl md:text-4xl font-black uppercase mb-4 tracking-tighter group-hover:text-[#FF5722] transition-colors flex items-center gap-3">
-                    {project.featured && (
-                      <span className="w-2 h-2 rounded-full bg-[#FF5722] animate-pulse shrink-0" title="Featured Work" />
-                    )}
-                    {project.title}
-                  </h3>
                   
-                  <p className="text-gray-400 text-lg mb-8 leading-relaxed font-medium line-clamp-3">
+                  {/* Overlay Action */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-90 group-hover:scale-100">
+                    <a 
+                      href={project.liveLink} 
+                      target="_blank" 
+                      className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
+                    >
+                      <ArrowUpRight size={24} />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex flex-col">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-3xl font-bold uppercase tracking-tight group-hover:text-primary transition-colors">{project.title}</h3>
+                    <div className="flex gap-4">
+                      {project.githubLink && (
+                        <a href={project.githubLink} target="_blank" className="text-zinc-600 hover:text-white transition-colors">
+                          <FaGithub size={20} />
+                        </a>
+                      )}
+                      {project.liveLink && (
+                        <a href={project.liveLink} target="_blank" className="text-zinc-600 hover:text-white transition-colors">
+                          <ExternalLink size={20} />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-zinc-500 text-lg leading-relaxed font-medium line-clamp-2 group-hover:text-zinc-400 transition-colors">
                     {project.description}
                   </p>
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-8 mt-auto">
-                    {project.liveLink && (
-                      <motion.a
-                        href={project.liveLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-3 text-xs font-black uppercase tracking-widest text-white hover:text-[#FF5722] transition-colors group/link"
-                      >
-                        Live Demo
-                        <ExternalLink size={16} className="group-hover/link:-translate-y-1 group-hover/link:translate-x-1 transition-transform" />
-                      </motion.a>
-                    )}
-                    {project.githubLink && (
-                      <motion.a
-                        href={project.githubLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-3 text-xs font-black uppercase tracking-widest text-gray-500 hover:text-white transition-colors"
-                      >
-                        Source
-                        <FaGithub size={16} />
-                      </motion.a>
-                    )}
-                  </div>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         )}
 
         {/* Empty State */}
-        {!loading && filteredProjects.length === 0 && (
-          <motion.div
-            className="text-center py-40 border border-dashed border-white/10"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-          >
-            <p className="text-gray-500 font-black uppercase tracking-[0.2em]">No projects found in this category</p>
-          </motion.div>
+        {!loading && projects.length === 0 && (
+          <div className="text-center py-40 rounded-[3rem] glass border-white/5">
+            <p className="text-zinc-600 font-bold uppercase tracking-[0.3em] text-sm">No artifacts found in the vault.</p>
+          </div>
         )}
       </div>
-    </motion.section>
+    </section>
   );
 }

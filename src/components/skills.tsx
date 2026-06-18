@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Terminal, Database, Code2, Cpu } from "lucide-react";
+import { Terminal, Database, Code2, Cpu, Sparkles, Layers, Box, Globe } from "lucide-react";
 import { 
   FaReact, 
   FaNodeJs, 
@@ -9,7 +9,10 @@ import {
   FaDocker, 
   FaBrain, 
   FaNetworkWired, 
-  FaMemory } from "react-icons/fa";
+  FaMemory, 
+  FaAws,
+  FaLinux,
+  FaDatabase} from "react-icons/fa";
 import { 
   SiNextdotjs, 
   SiTypescript, 
@@ -22,73 +25,83 @@ import {
   SiVercel, 
   SiLangchain, 
   SiOllama, 
-  SiOpenai 
+  SiOpenai, 
+  SiNestjs,
+  SiRedis,
+  SiRabbitmq
 } from "react-icons/si";
 
 const skillCategories = [
   {
-    title: "Frontend",
-    icon: <Terminal className="text-[#FF5722]" size={32} />,
+    title: "Full Stack Design",
+    description: "Architecting high-performance web ecosystems.",
+    icon: <Globe className="text-primary" size={24} />,
     skills: [
-      { name: "React", icon: <FaReact className="text-[#61DAFB]" /> },
       { name: "Next.js", icon: <SiNextdotjs /> },
+      { name: "React", icon: <FaReact className="text-[#61DAFB]" /> },
       { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" /> },
-      { name: "Tailwind CSS", icon: <SiTailwindcss className="text-[#06B6D4]" /> },
-      { name: "Framer Motion", icon: <SiFramer /> },
+      { name: "NestJS", icon: <SiNestjs className="text-[#E0234E]" /> },
+      { name: "GraphQL", icon: <SiGraphql className="text-[#E10098]" /> },
     ]
   },
   {
-    title: "Backend",
-    icon: <Database className="text-[#FF5722]" size={32} />,
+    title: "Agentic AI",
+    description: "Autonomous reasoning and automation workflows.",
+    icon: <Cpu className="text-primary" size={24} />,
     skills: [
-      { name: "Node.js", icon: <FaNodeJs className="text-[#339933]" /> },
-      { name: "Express", icon: <SiExpress /> },
+      { name: "LangChain", icon: <SiLangchain className="text-white"/> },
+      { name: "LangGraph", icon: <FaNetworkWired  className="text-white"/> },
+      { name: "OpenAI SDK", icon: <SiOpenai className="text-white"/> },
+      { name: "Ollama", icon: <SiOllama className="text-white"/> },
+      { name: "RAG Systems", icon: <FaBrain className="text-white" /> },
+    ],
+  },
+  {
+    title: "Data & Scaling",
+    description: "Reliable backends and real-time processing.",
+    icon: <Database className="text-primary" size={24} />,
+    skills: [
       { name: "PostgreSQL", icon: <SiPostgresql className="text-[#4169E1]" /> },
       { name: "MongoDB", icon: <SiMongodb className="text-[#47A248]" /> },
-      { name: "GraphQL", icon: <SiGraphql className="text-[#E10098]" /> },
+      { name: "Redis", icon: <SiRedis className="text-[#D82C20]" /> },
+      { name: "RabbitMQ", icon: <SiRabbitmq className="text-[#FF6600]" /> },
+      { name: "Prisma", icon: <FaDatabase className="text-white" /> },
     ],
   },
   {
-    title: "DevOps",
-    icon: <Code2 className="text-[#FF5722]" size={32} />,
+    title: "Cloud & DevOps",
+    description: "Secure, automated deployment pipelines.",
+    icon: <Layers className="text-primary" size={24} />,
     skills: [
-      { name: "Git", icon: <FaGitAlt className="text-[#F05032]" /> },
       { name: "Docker", icon: <FaDocker className="text-[#2496ED]" /> },
       { name: "Vercel", icon: <SiVercel /> },
-    ],
-  },
-  {
-    title: "Agentic AI",
-    icon: <Cpu className="text-[#FF5722]" size={32} />,
-    skills: [
-      { name: "Langchain", icon: <SiLangchain /> },
-      { name: "Langgraph", icon: <FaNetworkWired /> },
-      { name: "Memory0", icon: <FaMemory /> },
-      { name: "Ollama", icon: <SiOllama /> },
-      { name: "RAG", icon: <FaBrain /> },
-      { name: "Openai SDK", icon: <SiOpenai /> },
+      { name: "Git ", icon: <FaGitAlt className="text-[#F05032]" /> },
+      {name: "Linux", icon: <FaLinux className="text-white" />}
     ],
   }
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 bg-black text-white">
+    <section id="skills" className="py-32 bg-[#0A0A0A] text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-          <div className="max-w-2xl">
-            <span className="text-[#FF5722] font-black tracking-[0.3em] uppercase text-sm mb-4 block">
-              Expertise
-            </span>
-            <h2 className="text-5xl md:text-6xl font-black uppercase leading-tight">
-              Technical <span className="text-transparent" style={{ WebkitTextStroke: '1px white' }}>Skills</span>
+        {/* Section Header */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10 mb-8">
+              <Sparkles size={12} className="text-primary" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Stack & Expertise</span>
+            </div>
+            <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tight leading-none mb-8">
+              Technical <span className="text-gradient">Ecosystem</span>
             </h2>
+            <p className="text-zinc-500 text-lg md:text-xl font-medium leading-relaxed max-w-2xl">
+              I leverage a premium selection of modern tools to build applications that are as beautiful on the inside as they are on the outside.
+            </p>
           </div>
-          <p className="text-gray-400 text-lg max-w-sm">
-            Crafting digital solutions with the latest technologies and design principles.
-          </p>
         </div>
 
+        {/* Skills Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skillCategories.map((category, index) => (
             <motion.div
@@ -96,17 +109,24 @@ export default function Skills() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="p-8 border border-white/5 bg-white/5 hover:bg-white/10 transition-all duration-300 group"
+              transition={{ delay: index * 0.1, duration: 0.8 }}
+              className="group p-8 rounded-[2rem] glass border-white/10 hover:border-primary/50 transition-all duration-500 flex flex-col h-full"
             >
-              <div className="mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-500">
                 {category.icon}
               </div>
-              <h3 className="text-xl font-black uppercase mb-6 tracking-wider">{category.title}</h3>
-              <ul className="space-y-4">
+              
+              <h3 className="text-xl font-bold uppercase mb-4 tracking-tight text-white">{category.title}</h3>
+              <p className="text-zinc-500 text-sm font-medium mb-8 leading-relaxed">
+                {category.description}
+              </p>
+              
+              <div className="w-full h-px bg-white/5 mb-8" />
+              
+              <ul className="space-y-5 mt-auto">
                 {category.skills.map((skill) => (
-                  <li key={skill.name} className="flex items-center gap-3 text-gray-400 text-sm font-bold uppercase tracking-widest group/skill transition-colors hover:text-white">
-                    <span className="text-[#FF5722] text-lg transition-transform group-hover/skill:scale-125">
+                  <li key={skill.name} className="flex items-center gap-4 text-zinc-500 text-xs font-bold uppercase tracking-[0.15em] hover:text-white transition-colors group/skill">
+                    <span className="text-lg text-zinc-600 group-hover/skill:text-primary transition-colors">
                       {skill.icon}
                     </span>
                     {skill.name}
@@ -116,8 +136,9 @@ export default function Skills() {
             </motion.div>
           ))}
         </div>
+
+        {/* Modern Marquee / Logos Section would go here */}
       </div>
     </section>
   );
 }
-

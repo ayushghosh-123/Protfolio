@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { ExternalLink, Search, Sparkles, Loader, AlertCircle } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface Blog {
   _id: string;
@@ -22,6 +24,7 @@ export default function BlogSection() {
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("ALL");
+  const pathname = usePathname();
 
   useEffect(() => {
     fetchBlogs();
@@ -75,16 +78,16 @@ export default function BlogSection() {
 
   if (error) {
     return (
-      <section className="min-h-screen bg-black px-6 py-32 flex flex-col justify-center">
+      <section className="min-h-screen bg-[#0A0A0A] px-6 py-32 flex flex-col justify-center">
         <div className="max-w-7xl mx-auto text-center w-full">
-          <div className="inline-flex items-center gap-3 bg-white/5 border border-[#FF5722]/50 rounded-lg p-6 text-white mb-8">
-            <AlertCircle size={20} className="text-[#FF5722]" />
+          <div className="inline-flex items-center gap-3 bg-white/[0.03] border border-primary/50 rounded-2xl p-6 text-white mb-8">
+            <AlertCircle size={20} className="text-primary" />
             <p className="font-bold uppercase tracking-tight">{error}</p>
           </div>
           <div>
             <button
               onClick={fetchBlogs}
-              className="px-8 py-3 bg-[#FF5722] text-white font-black uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all"
+              className="px-8 py-3 bg-primary text-white font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white hover:text-black transition-all duration-300"
             >
               Try Again
             </button>
@@ -95,35 +98,46 @@ export default function BlogSection() {
   }
 
   return (
-    <section className="min-h-screen bg-black text-white px-6 py-32 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section className="min-h-screen bg-[#0A0A0A] text-white px-6 py-32 overflow-hidden relative">
+      {/* Background Decorative Glow */}
+      <div className="absolute top-1/3 -right-20 w-96 h-96 bg-primary/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/3 -left-20 w-96 h-96 bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="text-[#FF5722] font-black tracking-[0.3em] uppercase text-sm mb-4 block">
-              Publications
-            </span>
-            <h2 className="text-5xl md:text-8xl font-black uppercase leading-none">
-              My <span className="text-transparent" style={{ WebkitTextStroke: "1px white" }}>Thoughts</span>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-8">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10 mb-8">
+              <Sparkles size={12} className="text-primary" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Publications</span>
+            </div>
+            <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tight leading-none">
+              My <span className="text-gradient">Thoughts</span>
             </h2>
-          </motion.div>
+          </div>
+          
+          {/* Breadcrumb back to Home if on the sub-page */}
+          {pathname !== "/" && (
+            <Link 
+              href="/"
+              className="text-zinc-500 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2 px-4 py-2 rounded-full border border-white/5 hover:border-white/20 bg-white/[0.02]"
+            >
+              ← Back to Home
+            </Link>
+          )}
         </div>
 
         {/* Search and Filters Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-16 pb-8 border-b border-white/10">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-16 pb-8 border-b border-white/5">
           <div className="flex flex-wrap items-center gap-3 w-full md:w-auto overflow-x-auto no-scrollbar py-2">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-5 py-2 text-[10px] uppercase tracking-widest font-black rounded-full border transition-all duration-300 ${
+                className={`px-5 py-2 text-[10px] uppercase tracking-widest font-bold rounded-full border transition-all duration-300 ${
                   activeCategory === category
-                    ? "bg-[#FF5722] border-[#FF5722] text-white"
-                    : "bg-transparent border-white/10 text-gray-400 hover:border-white hover:text-white"
+                    ? "bg-primary border-primary text-white"
+                    : "bg-transparent border-white/10 text-zinc-400 hover:border-white hover:text-white"
                 }`}
               >
                 {category}
@@ -132,7 +146,7 @@ export default function BlogSection() {
           </div>
 
           <div className="relative w-full md:w-80">
-            <span className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-gray-500">
+            <span className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-zinc-500">
               <Search size={16} />
             </span>
             <input
@@ -140,7 +154,7 @@ export default function BlogSection() {
               placeholder="SEARCH ARTICLE..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white/5 border border-white/10 rounded-full py-3 pl-12 pr-6 text-xs uppercase tracking-widest font-bold text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5722] transition-colors"
+              className="w-full bg-white/[0.03] border border-white/10 rounded-full py-3 pl-12 pr-6 text-xs uppercase tracking-widest font-bold text-white placeholder-zinc-500 focus:outline-none focus:border-primary transition-colors"
             />
           </div>
         </div>
@@ -152,9 +166,9 @@ export default function BlogSection() {
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
             >
-              <Loader size={48} className="text-[#FF5722]" />
+              <Loader size={48} className="text-primary" />
             </motion.div>
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500">
+            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500">
               Loading thoughts...
             </span>
           </div>
@@ -183,7 +197,7 @@ export default function BlogSection() {
                     <motion.article
                       key={blog._id}
                       variants={cardVariants}
-                      className="group relative flex flex-col bg-white/[0.02] border border-white/5 hover:border-[#FF5722]/30 rounded-3xl p-6 transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,87,34,0.05)]"
+                      className="group relative flex flex-col glass border-white/10 hover:border-primary/50 rounded-[2rem] p-6 transition-all duration-500 hover:shadow-[0_0_50px_rgba(139,92,246,0.1)]"
                     >
                       <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-white/5 grayscale group-hover:grayscale-0 transition-all duration-700">
                         <img
@@ -193,25 +207,25 @@ export default function BlogSection() {
                           loading="lazy"
                         />
                         <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-                          <span className="text-[#FF5722] text-[9px] font-black uppercase tracking-widest">
+                          <span className="text-primary text-[9px] font-bold uppercase tracking-widest">
                             {blog.category}
                           </span>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-4 text-[10px] font-black tracking-widest text-gray-500 mb-3">
+                      <div className="flex items-center gap-4 text-[10px] font-bold tracking-widest text-zinc-500 mb-3">
                         <span>{blogDate}</span>
                         <span className="w-1 h-1 rounded-full bg-white/20" />
                         <span className="flex items-center gap-1">
-                          <Sparkles size={10} className="text-[#FF5722]" /> {blog.readTime}
+                          <Sparkles size={10} className="text-primary" /> {blog.readTime}
                         </span>
                       </div>
 
-                      <h3 className="text-xl md:text-2xl font-black uppercase mb-4 leading-tight tracking-tight group-hover:text-[#FF5722] transition-colors">
+                      <h3 className="text-xl md:text-2xl font-bold uppercase mb-4 leading-tight tracking-tight group-hover:text-primary transition-colors">
                         {blog.title}
                       </h3>
 
-                      <p className="text-gray-400 text-sm leading-relaxed mb-6 font-medium line-clamp-4">
+                      <p className="text-zinc-500 text-sm leading-relaxed mb-6 font-medium line-clamp-4">
                         {blog.summary}
                       </p>
 
@@ -219,7 +233,7 @@ export default function BlogSection() {
                         {blog.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="text-[9px] font-bold text-gray-500 uppercase tracking-widest"
+                            className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest"
                           >
                             #{tag}
                           </span>
@@ -230,7 +244,7 @@ export default function BlogSection() {
                         href={blog.watchUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between w-full bg-white/5 group-hover:bg-[#FF5722] text-white hover:text-white px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition-all duration-500 border border-white/5 group-hover:border-[#FF5722]"
+                        className="flex items-center justify-between w-full bg-white/[0.03] group-hover:bg-primary text-white hover:text-white px-6 py-4 rounded-2xl text-xs font-bold uppercase tracking-widest transition-all duration-500 border border-white/5 group-hover:border-primary"
                       >
                         <span>Watch / Read Blog</span>
                         <ExternalLink size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -247,7 +261,7 @@ export default function BlogSection() {
                 exit={{ opacity: 0 }}
                 className="text-center py-32 border border-dashed border-white/10 rounded-3xl"
               >
-                <p className="text-gray-500 font-black uppercase tracking-[0.2em] mb-4">
+                <p className="text-zinc-500 font-bold uppercase tracking-[0.2em] mb-4">
                   No articles found
                 </p>
                 <button
@@ -255,7 +269,7 @@ export default function BlogSection() {
                     setSearchQuery("");
                     setActiveCategory("ALL");
                   }}
-                  className="px-6 py-3 bg-[#FF5722] text-white font-black uppercase tracking-widest text-[10px] rounded-full hover:bg-white hover:text-black transition-all"
+                  className="px-6 py-3 bg-primary text-white font-bold uppercase tracking-widest text-[10px] rounded-full hover:bg-white hover:text-black transition-all duration-300"
                 >
                   Clear Filters
                 </button>

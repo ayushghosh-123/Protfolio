@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { ArrowUpRight, Heart } from "lucide-react";
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 export default function Footer() {
   const router = useRouter();
 
   const handleSecretClick = (e: React.MouseEvent) => {
-    // If Alt key is held down during click, go to admin
     if (e.altKey) {
       e.preventDefault();
       router.push('/admin');
@@ -15,28 +16,63 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-black text-white pt-24 pb-12 border-t border-white/5">
+    <footer className="bg-[#0A0A0A] text-white pt-32 pb-16 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mb-24">
-          <div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 mb-32">
+          
+          <div className="lg:col-span-5">
             <Link 
               href="/" 
               onClick={handleSecretClick}
-              className="text-5xl font-black tracking-tighter text-white mb-6 block cursor-pointer select-none"
+              className="text-4xl font-black tracking-tighter text-white mb-8 block group"
             >
-              A<span className="text-[#FF5722]">G</span>
+              A<span className="text-primary group-hover:text-accent transition-colors">GHOSH</span>
             </Link>
-            <p className="text-gray-500 max-w-xs font-bold uppercase text-[10px] tracking-[0.2em] leading-relaxed">
-              Modern digital experiences crafted with precision and bold aesthetics.
+            <p className="text-zinc-500 max-w-sm font-medium uppercase text-xs tracking-[0.2em] leading-loose mb-10">
+              Transforming complex engineering challenges into seamless, high-performance digital realities with Agentic AI and full-stack expertise.
             </p>
+            <div className="flex gap-6">
+              <a href="#" className="text-zinc-600 hover:text-white transition-colors"><FaGithub size={20} /></a>
+              <a href="#" className="text-zinc-600 hover:text-white transition-colors"><FaLinkedin size={20} /></a>
+              <a href="#" className="text-zinc-600 hover:text-white transition-colors"><FaTwitter size={20} /></a>
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-x-12 gap-y-6">
-            <Link href="/about" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">About</Link>
-            <Link href="/skills" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Skills</Link>
-            <Link href="/projects" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Projects</Link>
-            <Link href="/blog" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Blog</Link>
-            <Link href="/contact" className="text-xs font-black uppercase tracking-widest hover:text-[#FF5722] transition-colors">Contact</Link>
+          <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-12">
+            <div className="space-y-6">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600">Navigation</h4>
+              <ul className="space-y-4">
+                <li><Link href="/about" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">About</Link></li>
+                <li><Link href="/skills" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">Skills</Link></li>
+                <li><Link href="/projects" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">Projects</Link></li>
+              </ul>
+            </div>
+            <div className="space-y-6">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600">Connect</h4>
+              <ul className="space-y-4">
+                <li><Link href="/blog" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">Blog</Link></li>
+                <li><Link href="/contact" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">Contact</Link></li>
+                <li><a href="mailto:ghosyayush910@gmail.com" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
+                  Email <ArrowUpRight size={12} />
+                </a></li>
+              </ul>
+            </div>
+            <div className="space-y-6 hidden md:block">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600">Location</h4>
+              <p className="text-xs font-bold uppercase tracking-widest text-zinc-400 leading-relaxed">
+                West Bengal, India <br />
+                Operating Worldwide
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="text-[9px] font-bold uppercase tracking-[0.4em] text-zinc-700">
+            © 2026 Ayush Ghosh. All Rights Reserved.
+          </div>
+          <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.4em] text-zinc-700">
+            Built with <Heart size={10} className="text-primary fill-primary" /> using Next.js & Framer Motion
           </div>
         </div>
       </div>
