@@ -2,9 +2,24 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Layers, ArrowUpRight, Loader2 } from "lucide-react";
+import { ExternalLink, Layers, Loader2 } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import Image from "next/image";
+import { 
+  SiNextdotjs, 
+  SiTypescript, 
+  SiReact, 
+  SiTailwindcss, 
+  SiNodedotjs, 
+  SiMongodb, 
+  SiPostgresql, 
+  SiSupabase,
+  SiEthereum,
+  SiGooglechrome,
+  SiNear,
+  SiRust,
+  SiSolidity
+} from "react-icons/si";
 
 interface Project {
   _id: string;
@@ -19,6 +34,63 @@ interface Project {
   createdAt: string;
 }
 
+// Map tech stack tags to their corresponding React icons
+const TechIcon = ({ tag }: { tag: string }) => {
+  const normalized = tag.toLowerCase().trim();
+  switch (normalized) {
+    case "next.js":
+    case "nextjs":
+      return <SiNextdotjs className="w-5 h-5 text-white" title="Next.js" />;
+    case "typescript":
+    case "ts":
+      return <SiTypescript className="w-5 h-5 text-[#3178C6]" title="TypeScript" />;
+    case "javascript":
+    case "js":
+      return (
+        <span className="w-5 h-5 font-black text-[9px] bg-[#F7DF1E] text-black flex items-center justify-center rounded-sm select-none" title="JavaScript">
+          JS
+        </span>
+      );
+    case "react":
+    case "react.js":
+    case "reactjs":
+      return <SiReact className="w-5 h-5 text-[#61DAFB]" title="React" />;
+    case "tailwind":
+    case "tailwindcss":
+      return <SiTailwindcss className="w-5 h-5 text-[#06B6D4]" title="Tailwind CSS" />;
+    case "node":
+    case "node.js":
+    case "nodejs":
+      return <SiNodedotjs className="w-5 h-5 text-[#339933]" title="Node.js" />;
+    case "mongodb":
+    case "mongo":
+      return <SiMongodb className="w-5 h-5 text-[#47A248]" title="MongoDB" />;
+    case "postgresql":
+    case "postgres":
+      return <SiPostgresql className="w-5 h-5 text-[#4169E1]" title="PostgreSQL" />;
+    case "supabase":
+      return <SiSupabase className="w-5 h-5 text-[#3ECF8E]" title="Supabase" />;
+    case "ethereum":
+    case "eth":
+      return <SiEthereum className="w-5 h-5 text-[#3C3C3D]" title="Ethereum" />;
+    case "chrome":
+    case "googlechrome":
+      return <SiGooglechrome className="w-5 h-5 text-[#4285F4]" title="Google Chrome" />;
+    case "near":
+      return <SiNear className="w-5 h-5 text-white" title="NEAR" />;
+    case "rust":
+      return <SiRust className="w-5 h-5 text-[#A72145]" title="Rust" />;
+    case "solidity":
+      return <SiSolidity className="w-5 h-5 text-[#363636]" title="Solidity" />;
+    default:
+      return (
+        <span className="text-[10px] font-semibold text-zinc-400 px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 select-none">
+          {tag}
+        </span>
+      );
+  }
+};
+
 export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,6 +104,13 @@ export default function Projects() {
       })
       .catch(() => setLoading(false));
   }, []);
+
+  const getYear = (createdAtString?: string) => {
+    if (!createdAtString) return "2025";
+    const date = new Date(createdAtString);
+    const year = date.getFullYear();
+    return isNaN(year) ? "2025" : year.toString();
+  };
 
   return (
     <section id="projects" className="py-32 bg-[#0A0A0A] text-white overflow-hidden">
@@ -50,20 +129,16 @@ export default function Projects() {
               A curated collection of digital experiences, AI agents, and engineering solutions built for performance.
             </p>
           </div>
-          
-          <button className="flex items-center gap-3 px-8 py-4 rounded-full glass border-white/10 text-[10px] font-bold uppercase tracking-widest hover:bg-white/5 transition-colors group">
-            All Repositories
-            <FaGithub size={14} className="group-hover:rotate-12 transition-transform" />
-          </button>
+
         </div>
 
-        {/* Projects Bento Grid Concept */}
+        {/* Projects Layout */}
         {loading ? (
           <div className="flex items-center justify-center py-40">
             <Loader2 className="animate-spin text-primary" size={40} />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
+          <div className="flex flex-col gap-8 lg:gap-12">
             {projects.map((project, idx) => (
               <motion.div
                 key={project._id}
@@ -71,60 +146,74 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative"
+                className="group relative rounded-3xl border border-white bg-[#0D0D0D] p-6 lg:p-8 transition-all duration-500 hover:shadow-[0_0_80px_rgba(255,255,255,0.02)]"
               >
-                {/* Image Container */}
-                <div className="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden border border-white/10 bg-zinc-900 mb-8 shadow-2xl transition-all duration-700 group-hover:shadow-[0_0_80px_rgba(139,92,246,0.15)]">
-                  <Image
-                    src={project.imageUrl}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover transition-all duration-1000 scale-105 group-hover:scale-100 grayscale-[0.3] group-hover:grayscale-0"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity" />
-                  
-                  {/* Floating Tech Tags in Image */}
-                  <div className="absolute top-6 left-6 flex flex-wrap gap-2">
-                    {project.tags.slice(0, 3).map(tag => (
-                      <span key={tag} className="px-3 py-1 rounded-lg glass border-white/10 text-[9px] font-bold uppercase tracking-widest text-white/80">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  
-                  {/* Overlay Action */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-90 group-hover:scale-100">
-                    <a 
-                      href={project.liveLink} 
-                      target="_blank" 
-                      className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"
-                    >
-                      <ArrowUpRight size={24} />
-                    </a>
-                  </div>
-                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                  {/* Left Column: Content */}
+                  <div className="lg:col-span-7 flex flex-col justify-between">
+                    <div>
+                      {/* Title & Year */}
+                      <div className="flex justify-between items-start gap-4">
+                        <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-white group-hover:text-zinc-200 transition-colors">
+                          {project.title}
+                        </h3>
+                        <span className="text-sm md:text-base font-semibold text-zinc-500 tracking-wider select-none shrink-0 pt-1">
+                          {getYear(project.createdAt)}
+                        </span>
+                      </div>
 
-                {/* Content */}
-                <div className="flex flex-col">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-3xl font-bold uppercase tracking-tight group-hover:text-primary transition-colors">{project.title}</h3>
-                    <div className="flex gap-4">
+                      {/* Tech Icons Row */}
+                      <div className="flex flex-wrap items-center gap-4 mt-4">
+                        {project.tags.map((tag) => (
+                          <div key={tag} className="flex items-center text-zinc-400 hover:text-white transition-colors">
+                            <TechIcon tag={tag} />
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-zinc-400 text-sm md:text-base font-normal leading-relaxed mt-6">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex flex-wrap gap-3 mt-8 lg:mt-12">
                       {project.githubLink && (
-                        <a href={project.githubLink} target="_blank" className="text-zinc-600 hover:text-white transition-colors">
-                          <FaGithub size={20} />
+                        <a
+                          href={project.githubLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-black hover:bg-zinc-200 transition-colors text-xs md:text-sm font-bold shadow-md select-none"
+                        >
+                          <FaGithub className="w-4 h-4" />
+                          Code
                         </a>
                       )}
                       {project.liveLink && (
-                        <a href={project.liveLink} target="_blank" className="text-zinc-600 hover:text-white transition-colors">
-                          <ExternalLink size={20} />
+                        <a
+                          href={project.liveLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-black hover:bg-zinc-200 transition-colors text-xs md:text-sm font-bold shadow-md select-none"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          Live
                         </a>
                       )}
                     </div>
                   </div>
-                  <p className="text-zinc-500 text-lg leading-relaxed font-medium line-clamp-2 group-hover:text-zinc-400 transition-colors">
-                    {project.description}
-                  </p>
+
+                  {/* Right Column: Project Image Preview */}
+                  <div className="lg:col-span-5 relative w-full h-full min-h-[220px] lg:min-h-full aspect-[16/10] lg:aspect-auto rounded-2xl overflow-hidden border border-white/5 bg-zinc-900 shadow-2xl">
+                    <Image
+                      src={project.imageUrl}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 40vw, 30vw"
+                      className="object-cover transition-all duration-750 scale-102 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
               </motion.div>
             ))}

@@ -34,42 +34,20 @@ export default function Hero() {
           </div>
 
           {/* Subheadline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="text-zinc-500 text-lg md:text-xl max-w-xl mb-12 leading-relaxed font-medium"
-          >
-            Software Developer & AI Engineer trying to solve complex engineering problems
-          </motion.p>
-
-          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-5 mb-12 lg:mb-0"
+            transition={{ duration: 1, delay: 0.2 }}
+            className="text-zinc-300 text-lg md:text-xl max-w-xl mb-12 leading-relaxed font-medium"
           >
-            <Link 
-              href="/projects"
-              className="group relative flex items-center gap-3 px-10 py-5 bg-white text-black font-bold uppercase tracking-widest text-xs rounded-full overflow-hidden transition-all hover:pr-12"
-            >
-              <span className="relative z-10">View My Work</span>
-              <ArrowRight size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-              <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-            </Link>
-            
-            <Link 
-              href="/contact"
-              className="group flex items-center gap-3 px-10 py-5 bg-transparent border border-white/10 text-white font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white/5 transition-all"
-            >
-              Book a Call
-              <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                <Play size={10} fill="currentColor" />
-              </div>
-            </Link>
+            Software Developer & Agentic Developer
+
+            <p className="text-gray-400 text-sm md:text-base mb-12 leading-relaxed font-medium">
+              Kolkata , West Bengal , India
+            </p>
           </motion.div>
-        </div>
+          
+          </div>
 
         {/* Right Side: Image Column (Fills the Empty Space) */}
         <div className="flex justify-center items-center w-full">

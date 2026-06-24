@@ -1,10 +1,42 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+// LiveClock component for the navbar
+const LiveClock = () => {
+  const [timeString, setTimeString] = useState("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      const formatter = new Intl.DateTimeFormat("en-US", {
+        timeZone: "Asia/Kolkata",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      });
+      setTimeString(formatter.format(new Date()));
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-zinc-400 select-none">
+      <span className="relative flex h-1.5 w-1.5">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+      </span>
+      <span>{timeString || "00:00:00"} IST</span>
+    </div>
+  );
+};
 
 export default function Navbar() {
   const [mounted, setMounted] = useState(false);
@@ -65,14 +97,10 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Action Button */}
-        <Link
-          href="/contact"
-          className="hidden md:flex items-center gap-2 bg-white text-black text-[10px] font-bold uppercase tracking-widest px-5 py-2 rounded-full hover:bg-[#8B5CF6] hover:text-white transition-all duration-500 group"
-        >
-          Book a Call
-          <ArrowUpRight size={12} className="group-hover:rotate-45 transition-transform" />
-        </Link>
+        {/* Live Clock / Time Count */}
+        <div className="hidden md:flex items-center gap-2 border-l border-white/10 pl-6">
+          <LiveClock />
+        </div>
 
         {/* Mobile Toggle */}
         <button 
@@ -103,13 +131,6 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <div className="w-full h-px bg-white/5 my-2" />
-              <Link
-                href="/contact"
-                className="w-full text-center bg-white text-black py-4 rounded-2xl font-bold uppercase tracking-widest text-sm"
-              >
-                Book a Call
-              </Link>
             </div>
           </motion.div>
         )}

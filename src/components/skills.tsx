@@ -92,7 +92,7 @@ export default function Skills() {
               <Sparkles size={12} className="text-primary" />
               <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Stack & Expertise</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tight leading-none mb-8">
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tight leading-none mb-8">
               Skills
             </h2>
           </div>
@@ -107,7 +107,7 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.8 }}
-              className="group p-8 rounded-[2rem] glass border-white/10 hover:border-primary/50 transition-all duration-500 flex flex-col h-full"
+              className="group p-8 rounded-[2rem] glass border-white/10 transition-all duration-500 flex flex-col h-full"
             >
               <div className="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-500">
                 {category.icon}

@@ -1,129 +1,104 @@
 "use client";
-
 import { motion } from "framer-motion";
-import { Mail, ArrowUpRight, Send, Phone, MessageSquare } from "lucide-react";
-import { FaWhatsapp, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { Mail, ArrowRight } from "lucide-react";
+import { FaGithub, FaLinkedin, FaTwitter, FaWhatsapp } from "react-icons/fa";
+import Image from "next/image";
 
 export default function Contact() {
-  const socials = [
-    { name: "GitHub", icon: <FaGithub size={18} />, href: "https://github.com/ayushghosh-123" },
-    { name: "LinkedIn", icon: <FaLinkedin size={18} />, href: "https://www.linkedin.com/in/ayush-ghosh-9659772b0/" },
-    { name: "Twitter", icon: <FaTwitter size={18} />, href: "https://x.com/AyushGhosh30804" },
-    { name: "Email", icon: <Mail size={18} />, href: "mailto:ghosyayush910@gmail.com" }
+  const socialLinks = [
+    { name: "Email", icon: <Mail size={20} />, href: "mailto:ghosyayush910@gmail.com" },
+    { name: "LinkedIn", icon: <FaLinkedin size={20} />, href: "https://www.linkedin.com/in/ayush-ghosh-9659772b0/" },
+    { name: "GitHub", icon: <FaGithub size={20} />, href: "https://github.com/ayushghosh-123" },
+    { name: "Twitter", icon: <FaTwitter size={20} />, href: "https://x.com/AyushGhosh30804" },
+    { name: "WhatsApp", icon: <FaWhatsapp size={20} />, href: "https://wa.me/919064941837" },
   ];
 
   return (
-    <section id="contact" className="relative py-32 bg-[#0A0A0A] text-white overflow-hidden glow-mesh">
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
+    <section id="contact" className="py-32 bg-[#0A0A0A] text-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        
 
-          {/* Left: Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10 mb-8">
-              <MessageSquare size={12} className="text-primary" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Collaboration</span>
-            </div>
-            
-            <h2 className="text-6xl md:text-8xl font-bold uppercase tracking-tighter leading-[0.9] mb-12">
-              Building <br />
-              Something <br />
-              <span className="text-gradient">Epic?</span>
-            </h2>
+        {/* Center Content Area */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="flex flex-col items-center text-center max-w-xl mx-auto mb-24"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-10">
+            Let's Work Together
+          </h2>
 
-            <p className="text-zinc-500 text-lg md:text-xl mb-16 max-w-md leading-relaxed font-medium">
-              Stop building MVPs that break. I’m currently available for high-impact freelance work and strategic full-time roles.
-            </p>
-
-            <div className="space-y-12">
-              <div className="flex flex-col gap-6">
-                <a href="mailto:ghosyayush910@gmail.com" className="text-2xl md:text-3xl font-bold tracking-tight text-white hover:text-primary transition-colors">
-                  ghosyayush910@gmail.com
-                </a>
-                <a href="https://wa.me/919064941837" className="flex items-center gap-3 text-zinc-500 hover:text-white transition-colors group">
-                   <Phone size={18} className="text-primary" />
-                   <span className="text-sm font-bold uppercase tracking-widest">+91 9064941837</span>
-                </a>
-              </div>
-
-              <div className="flex gap-4 flex-wrap">
-                {socials.map((social, i) => (
-                  <a
-                    key={i}
-                    href={social.href}
-                    className="w-12 h-12 rounded-2xl glass border-white/10 flex items-center justify-center text-zinc-500 hover:text-white hover:border-primary/50 transition-all duration-300"
-                  >
-                    {social.icon}
-                  </a>
-                ))}
+          {/* Side-by-side Squares */}
+          <div className="flex items-center gap-6 mb-10 select-none">
+            {/* Left box: Hero Photo */}
+            <div className="w-28 h-28 md:w-32 md:h-32 rounded-2xl border border-zinc-800/80 bg-zinc-950 p-1 flex items-center justify-center overflow-hidden">
+              <div className="relative w-full h-full rounded-xl overflow-hidden">
+                <Image
+                  src="/Images/hero_image.jpeg"
+                  alt="Ayush Ghosh"
+                  fill
+                  sizes="(max-width: 768px) 112px, 128px"
+                  className="object-cover object-top scale-105"
+                />
               </div>
             </div>
-          </motion.div>
 
-          {/* Right: Modern Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="relative"
-          >
-            <div className="p-10 md:p-14 rounded-[3rem] glass border-white/10 relative overflow-hidden">
-              {/* Subtle background gradient for form */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10" />
-              
-              <form className="space-y-12" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                  <div className="space-y-4 group">
-                    <label className="text-[9px] uppercase tracking-[0.3em] font-bold text-zinc-600 group-focus-within:text-primary transition-colors">Your Identity</label>
-                    <input
-                      type="text"
-                      placeholder="Name or Brand"
-                      className="w-full bg-transparent border-b border-white/5 py-4 focus:outline-none focus:border-primary/50 transition-colors placeholder:text-zinc-800 text-lg font-medium tracking-tight"
-                    />
-                  </div>
-                  <div className="space-y-4 group">
-                    <label className="text-[9px] uppercase tracking-[0.3em] font-bold text-zinc-600 group-focus-within:text-primary transition-colors">Secure Channel</label>
-                    <input
-                      type="email"
-                      placeholder="Email Address"
-                      className="w-full bg-transparent border-b border-white/5 py-4 focus:outline-none focus:border-primary/50 transition-colors placeholder:text-zinc-800 text-lg font-medium tracking-tight"
-                    />
-                  </div>
-                </div>
-                
-                <div className="space-y-4 group">
-                  <label className="text-[9px] uppercase tracking-[0.3em] font-bold text-zinc-600 group-focus-within:text-primary transition-colors">Brief Overview</label>
-                  <textarea
-                    rows={4}
-                    placeholder="Tell me about your mission..."
-                    className="w-full bg-transparent border-b border-white/5 py-4 focus:outline-none focus:border-primary/50 transition-colors placeholder:text-zinc-800 text-lg font-medium tracking-tight resize-none"
-                  />
-                </div>
+            {/* Double Arrow */}
+            <span className="text-zinc-500 font-mono text-2xl md:text-3xl">⇆</span>
 
-                <div className="flex flex-col sm:flex-row gap-5">
-                  <button className="flex-1 py-6 bg-white text-black font-bold uppercase tracking-[0.3em] text-[10px] hover:bg-[#8B5CF6] hover:text-white transition-all duration-500 flex items-center justify-center gap-4 rounded-3xl group">
-                    Deploy Message
-                    <Send size={14} className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                  
-                  <a
-                    href="https://wa.me/919064941837"
-                    target="_blank"
-                    className="px-8 py-6 rounded-3xl glass border-white/10 flex items-center justify-center gap-3 hover:bg-white/5 transition-all text-zinc-400 hover:text-[#25D366] group"
-                  >
-                    <FaWhatsapp size={20} />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">WhatsApp</span>
-                  </a>
-                </div>
-              </form>
+            {/* Right box: Circle Outline */}
+            <div className="w-28 h-28 md:w-32 md:h-32 rounded-2xl border border-zinc-800/80 bg-zinc-950 flex items-center justify-center">
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border border-zinc-800/80" />
             </div>
-          </motion.div>
-        </div>
+          </div>
+
+          <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white mb-3">
+            Suggestion/Idea/Thought?
+          </h3>
+          
+          <p className="text-zinc-400 text-sm md:text-base leading-relaxed font-normal mb-8 max-w-md">
+            Let's create the website you've always wanted. Send me a message to begin.
+          </p>
+
+          {/* Green Flame Icon */}
+          <svg 
+            viewBox="0 0 24 24" 
+            className="w-8 h-8 text-emerald-400 stroke-current fill-none stroke-[1.5]" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
+            <path d="M12 2C12 2 17 8 17 11.5C17 14.5 14.5 17 12 17C9.5 17 7 14.5 7 11.5C7 8 12 2 12 2Z" />
+            <path d="M12 7C12 7 14 10 14 11.5C14 12.88 12.88 14 12 14C11.12 14 10 12.88 10 11.5C10 10 12 7 12 7Z" opacity="0.5" />
+          </svg>
+        </motion.div>
+
+        {/* Social Links List */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="w-full max-w-4xl mx-auto border-b border-zinc-800/80"
+        >
+          {socialLinks.map((social, i) => (
+            <a
+              key={i}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between py-6 px-4 border-t border-zinc-800/80 hover:bg-white/[0.01] transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-4 text-zinc-400 group-hover:text-white transition-colors">
+                <span className="text-lg md:text-xl shrink-0">{social.icon}</span>
+                <span className="text-base md:text-lg font-bold tracking-tight">{social.name}</span>
+              </div>
+              <ArrowRight className="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all" />
+            </a>
+          ))}
+        </motion.div>
+
       </div>
     </section>
   );

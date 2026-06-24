@@ -111,8 +111,8 @@ export default function BlogSection() {
               <Sparkles size={12} className="text-primary" />
               <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Publications</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tight leading-none">
-              My <span className="text-gradient">Thoughts</span>
+            <h2 className="text-5xl md:text-7xl font-bold  tracking-tight leading-none">
+             Blog
             </h2>
           </div>
           

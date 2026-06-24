@@ -28,13 +28,10 @@ export default function Footer() {
             >
               A<span className="text-primary group-hover:text-accent transition-colors">GHOSH</span>
             </Link>
-            <p className="text-zinc-500 max-w-sm font-medium uppercase text-xs tracking-[0.2em] leading-loose mb-10">
-              Transforming complex engineering challenges into seamless, high-performance digital realities with Agentic AI and full-stack expertise.
-            </p>
             <div className="flex gap-6">
-              <a href="#" className="text-zinc-600 hover:text-white transition-colors"><FaGithub size={20} /></a>
-              <a href="#" className="text-zinc-600 hover:text-white transition-colors"><FaLinkedin size={20} /></a>
-              <a href="#" className="text-zinc-600 hover:text-white transition-colors"><FaTwitter size={20} /></a>
+              <a href="https://github.com/ayushghosh-123" className="text-zinc-600 hover:text-white transition-colors"><FaGithub size={20} /></a>
+              <a href="https://www.linkedin.com/in/ayush-ghosh-9659772b0/" className="text-zinc-600 hover:text-white transition-colors"><FaLinkedin size={20} /></a>
+              <a href="https://x.com/AyushGhosh30804" className="text-zinc-600 hover:text-white transition-colors"><FaTwitter size={20} /></a>
             </div>
           </div>
 
@@ -57,22 +54,6 @@ export default function Footer() {
                 </a></li>
               </ul>
             </div>
-            <div className="space-y-6 hidden md:block">
-              <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-600">Location</h4>
-              <p className="text-xs font-bold uppercase tracking-widest text-zinc-400 leading-relaxed">
-                West Bengal, India <br />
-                Operating Worldwide
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="text-[9px] font-bold uppercase tracking-[0.4em] text-zinc-700">
-            © 2026 Ayush Ghosh. All Rights Reserved.
-          </div>
-          <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.4em] text-zinc-700">
-            Built with <Heart size={10} className="text-primary fill-primary" /> using Next.js & Framer Motion
           </div>
         </div>
       </div>
