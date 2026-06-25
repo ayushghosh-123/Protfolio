@@ -19,12 +19,13 @@ import {
   SiWhatsapp,
   SiFramer,
   SiClerk,
-  SiHtml5
+  SiHtml5,
 } from "react-icons/si";
 import { FaCss } from "react-icons/fa6";
 import { MdEmail, MdOutlineWebhook } from "react-icons/md";
 import { AiFillOpenAI } from "react-icons/ai";
 import { FaGoogleDrive } from "react-icons/fa";
+import { RiSecurePaymentLine } from "react-icons/ri";
 
 
 
@@ -90,6 +91,8 @@ const TechIcon = ({ tag }: { tag: string }) => {
       return <AiFillOpenAI className="w-5 h-5 text-white" title="OpenAI" />;
     case "google drive":
       return <FaGoogleDrive className="w-5 h-5 text-white" title="Google Drive" />; 
+    case "paymentgateway":
+      return <RiSecurePaymentLine className="w-5 h-5 text-white" title="Payment Gateway" />;
     default:
       return (
         <span className="text-[10px] font-semibold text-zinc-400 px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 select-none">
