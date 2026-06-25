@@ -17,7 +17,7 @@ const bioConfig = {
   projectsCompleted: "50+",
   rating: "4.9/5",
   shortBio: "Building resilient web ecosystems and autonomous Agentic workflows that scale.",
-  storyParagraph: "I build highly scalable full-stack products with a strong focus on Web3, AI workflows, and cloud-native architecture. Since starting my software engineering journey in 2023, I’ve delivered decentralized platforms and responsive Next.js experiences using Solidity, Rust, MERN, PostgreSQL, Redis, and modern DevOps practices. I enjoy turning ambitious ideas into clean, production-ready systems that solve real problems, while continuously leveling up in system design, AI automation, and developer-first architecture.",
+  storyParagraph: "I build highly scalable full-stack products with a strong focus on AI Agents, AI workflows, MCP and cloud-native architecture. Since starting my software engineering journey in 2023, I&ve delivered decentralized platforms and responsive Next.js experiences using LangChain, LangGraph , RAG Systems, MCP , Mongoose, React, Node, Express with some cloud and best system design practices. I enjoy turning ambitious ideas into clean, production-ready systems that solve real problems, while continuously leveling up in system design, AI automation, and developer-first architecture.",
 };
 
 
