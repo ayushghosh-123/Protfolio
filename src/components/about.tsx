@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { User, Sparkles, Terminal, ShieldCheck, Zap, Briefcase, Award, MapPin } from "lucide-react";
+import {  Sparkles, Terminal, ShieldCheck, Zap, Briefcase, Award, MapPin } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+
 
 // ----------------------------------------------------
 // BIO CONFIGURATION
@@ -17,8 +17,7 @@ const bioConfig = {
   projectsCompleted: "50+",
   rating: "4.9/5",
   shortBio: "Building resilient web ecosystems and autonomous Agentic workflows that scale.",
-  storyParagraph1: "My journey in software engineering kicked off in 2021 as a freelance developer on Fiverr. By tackling challenging problems and delivering high-performance applications to clients worldwide, I achieved Level 1 Seller status. This fast-paced foundation taught me how to move rapidly from conceptual blueprints to production-ready platforms.",
-  storyParagraph2: "Today, I serve as the CTO of Axicov and Full Stack Developer at Infinitiech Partners. My current focus is designing Event-Driven Automation Pipelines, RAG systems, and self-reasoning AI Agents (using LangGraph and OpenAI) that automate complex operations and deliver real business value.",
+  storyParagraph: "I build highly scalable full-stack products with a strong focus on Web3, AI workflows, and cloud-native architecture. Since starting my software engineering journey in 2023, I’ve delivered decentralized platforms and responsive Next.js experiences using Solidity, Rust, MERN, PostgreSQL, Redis, and modern DevOps practices. I enjoy turning ambitious ideas into clean, production-ready systems that solve real problems, while continuously leveling up in system design, AI automation, and developer-first architecture.",
 };
 
 
@@ -131,8 +130,7 @@ export default function About() {
           >
             {/* Story Paragraphs */}
             <div className="space-y-6 text-zinc-400 text-sm md:text-base leading-relaxed font-medium">
-              <p>{bioConfig.storyParagraph1}</p>
-              <p>{bioConfig.storyParagraph2}</p>
+              <p>{bioConfig.storyParagraph}</p>
             </div>
 
             {/* Highlighted Values / Capabilities */}
