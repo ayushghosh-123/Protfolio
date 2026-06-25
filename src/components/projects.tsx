@@ -14,12 +14,19 @@ import {
   SiMongodb, 
   SiPostgresql, 
   SiSupabase,
-  SiEthereum,
-  SiGooglechrome,
-  SiNear,
-  SiRust,
-  SiSolidity
+  SiLangchain,
+  SiLanggraph,
+  SiWhatsapp,
+  SiFramer,
+  SiClerk,
+  SiHtml5
 } from "react-icons/si";
+import { FaCss } from "react-icons/fa6";
+import { MdEmail, MdOutlineWebhook } from "react-icons/md";
+import { AiFillOpenAI } from "react-icons/ai";
+import { FaGoogleDrive } from "react-icons/fa";
+
+
 
 interface Project {
   _id: string;
@@ -38,50 +45,51 @@ interface Project {
 const TechIcon = ({ tag }: { tag: string }) => {
   const normalized = tag.toLowerCase().trim();
   switch (normalized) {
-    case "next.js":
     case "nextjs":
       return <SiNextdotjs className="w-5 h-5 text-white" title="Next.js" />;
+    case "html":
+      return <SiHtml5 className="w-5 h-5 text-white" title="HTML5" />;
+    case "css":
+      return <FaCss className="w-5 h-5 text-blue-600" title="CSS" />;
     case "typescript":
-    case "ts":
       return <SiTypescript className="w-5 h-5 text-[#3178C6]" title="TypeScript" />;
-    case "javascript":
     case "js":
       return (
         <span className="w-5 h-5 font-black text-[9px] bg-[#F7DF1E] text-black flex items-center justify-center rounded-sm select-none" title="JavaScript">
           JS
         </span>
       );
-    case "react":
-    case "react.js":
     case "reactjs":
       return <SiReact className="w-5 h-5 text-[#61DAFB]" title="React" />;
-    case "tailwind":
     case "tailwindcss":
       return <SiTailwindcss className="w-5 h-5 text-[#06B6D4]" title="Tailwind CSS" />;
-    case "node":
-    case "node.js":
     case "nodejs":
       return <SiNodedotjs className="w-5 h-5 text-[#339933]" title="Node.js" />;
     case "mongodb":
-    case "mongo":
       return <SiMongodb className="w-5 h-5 text-[#47A248]" title="MongoDB" />;
     case "postgresql":
     case "postgres":
       return <SiPostgresql className="w-5 h-5 text-[#4169E1]" title="PostgreSQL" />;
     case "supabase":
       return <SiSupabase className="w-5 h-5 text-[#3ECF8E]" title="Supabase" />;
-    case "ethereum":
-    case "eth":
-      return <SiEthereum className="w-5 h-5 text-[#3C3C3D]" title="Ethereum" />;
-    case "chrome":
-    case "googlechrome":
-      return <SiGooglechrome className="w-5 h-5 text-[#4285F4]" title="Google Chrome" />;
-    case "near":
-      return <SiNear className="w-5 h-5 text-white" title="NEAR" />;
-    case "rust":
-      return <SiRust className="w-5 h-5 text-[#A72145]" title="Rust" />;
-    case "solidity":
-      return <SiSolidity className="w-5 h-5 text-[#363636]" title="Solidity" />;
+    case "whatsapp":
+      return <SiWhatsapp className="w-5 h-5 text-[#25D366]" title="Whatsapp" />;
+    case "framer":
+      return <SiFramer className="w-5 h-5 text-[#FF0055]" title="Framer" />;
+    case "clerk":
+      return <SiClerk className="w-5 h-5 text-[#276EF1]" title="Clerk" />;
+    case "langchain":
+      return <SiLangchain className="w-5 h-5 text-[#276EF1]" title="Langchain" />;
+    case "langgraph":
+      return <SiLanggraph className="w-5 h-5 text-[#276EF1]" title="Langgraph" />;
+    case "nodemailer":
+      return <MdEmail className="w-5 h-5 text-white" title="Nodemailer" />;
+    case "webhook":
+      return <MdOutlineWebhook className="w-5 h-5 text-white" title="Webhook" />;
+    case "openai":
+      return <AiFillOpenAI className="w-5 h-5 text-white" title="OpenAI" />;
+    case "google drive":
+      return <FaGoogleDrive className="w-5 h-5 text-white" title="Google Drive" />; 
     default:
       return (
         <span className="text-[10px] font-semibold text-zinc-400 px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 select-none">
@@ -105,12 +113,6 @@ export default function Projects() {
       .catch(() => setLoading(false));
   }, []);
 
-  const getYear = (createdAtString?: string) => {
-    if (!createdAtString) return "2025";
-    const date = new Date(createdAtString);
-    const year = date.getFullYear();
-    return isNaN(year) ? "2025" : year.toString();
-  };
 
   return (
     <section id="projects" className="py-32 bg-[#0A0A0A] text-white overflow-hidden">
@@ -122,7 +124,7 @@ export default function Projects() {
               <Layers size={12} className="text-primary" />
               <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Portfolio</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tight leading-none mb-8">
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tight leading-none mb-8">
               My Projects
             </h2>
             <p className="text-zinc-500 text-lg md:text-xl font-medium leading-relaxed max-w-2xl">
@@ -157,9 +159,6 @@ export default function Projects() {
                         <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-white group-hover:text-zinc-200 transition-colors">
                           {project.title}
                         </h3>
-                        <span className="text-sm md:text-base font-semibold text-zinc-500 tracking-wider select-none shrink-0 pt-1">
-                          {getYear(project.createdAt)}
-                        </span>
                       </div>
 
                       {/* Tech Icons Row */}
