@@ -10,7 +10,6 @@ export default function Contact() {
     { name: "LinkedIn", icon: <FaLinkedin size={20} />, href: "https://www.linkedin.com/in/ayush-ghosh-9659772b0/" },
     { name: "GitHub", icon: <FaGithub size={20} />, href: "https://github.com/ayushghosh-123" },
     { name: "Twitter", icon: <FaTwitter size={20} />, href: "https://x.com/AyushGhosh30804" },
-    { name: "WhatsApp", icon: <FaWhatsapp size={20} />, href: "https://wa.me/919064941837" },
   ];
 
   return (
