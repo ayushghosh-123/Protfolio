@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { FaGithub, FaLinkedin, FaTwitter, FaSpotify } from "react-icons/fa";
 
 export default function Hero() {
   return (
@@ -18,8 +19,15 @@ export default function Hero() {
         </motion.h1>
 
         <p className="mx-auto mt-6 max-w-xl text-[var(--muted)]">
-          Building resilient web ecosystems and autonomous Agentic workflows that scale. Focused on the intersection of AI orchestration and clean software architecture.
+          Engineer/Artist - I love building , braking and shipping the thing
         </p>
+        {/* add my social media icon based link here */}
+        <div className="flex justify-center gap-5 mt-6">
+          <a href="https://github.com/ghoshayush777" className="text-[var(--muted)] hover:text-foreground transition-colors" aria-label="GitHub"><FaGithub size={24} /></a>
+          <a href="https://www.linkedin.com/in/ayush-ghosh-0a9b9b9b9" className="text-[var(--muted)] hover:text-foreground transition-colors" aria-label="LinkedIn"><FaLinkedin size={24} /></a>
+          <a href="https://twitter.com/ayushghosh777" className="text-[var(--muted)] hover:text-foreground transition-colors" aria-label="Twitter"><FaTwitter size={24} /></a>
+          <a href="https://open.spotify.com" className="text-[var(--muted)] hover:text-foreground transition-colors" aria-label="Spotify"><FaSpotify size={24} /></a>
+        </div>
       </div>
     </section>
   );

@@ -1,13 +1,13 @@
 "use client";
 
 import { FaBrain } from "react-icons/fa";
-import { 
-  SiNextdotjs, 
-  SiTypescript, 
-  SiTailwindcss, 
-  SiLangchain, 
-  SiDocker, 
-  SiMongodb, 
+import {
+  SiNextdotjs,
+  SiTypescript,
+
+  SiLangchain,
+  SiDocker,
+  SiMongodb,
   SiPostgresql,
   SiVercel,
   SiNodedotjs,
@@ -33,7 +33,7 @@ export default function TrustedLogos() {
       <div className="max-w-7xl mx-auto px-6 mb-12 flex justify-center">
         <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-600">Trusted Technologies</span>
       </div>
-      
+
       <div className="relative flex overflow-x-hidden">
         <div className="flex animate-marquee whitespace-nowrap gap-16 items-center">
           {[...logos, ...logos].map((logo, idx) => (

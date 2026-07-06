@@ -83,13 +83,13 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-6 left-0 w-full z-50 transition-colors duration-300 pointer-events-none">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-0 flex justify-center">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-12 py-0 flex justify-center">
         {/* Capsule container holding logo, links, and controls */}
-        <div className="w-full max-w-4xl inline-flex items-center justify-between gap-4 bg-[var(--card)] border border-[var(--border)] rounded-full px-3 py-2 shadow-sm pointer-events-auto">
+        <div className="w-full max-w-4xl inline-flex items-center justify-between gap-2 md:gap-4 bg-[var(--card)] border border-[var(--border)] rounded-full px-2 py-1.5 md:px-3 md:py-2 shadow-sm pointer-events-auto">
           {/* Left: small logo on capsule */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 md:gap-3">
             <Link href="/" className="hidden md:inline-block font-serif text-sm font-semibold tracking-tight text-foreground">Ayush Ghosh</Link>
-            <Link href="/" className="md:hidden font-serif text-lg font-semibold tracking-tight text-foreground">AG</Link>
+            <Link href="/" className="md:hidden font-serif text-base font-semibold tracking-tight text-foreground">AG</Link>
           </div>
 
           {/* Center: nav links inside capsule */}
@@ -100,7 +100,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   aria-label={link.name}
-                  className="flex items-center justify-center gap-2 w-9 h-9 rounded-full transition-colors duration-150 text-[var(--muted)] hover:text-foreground hover:bg-[var(--card)]/10 focus:outline-none focus:ring-0"
+                  className="flex items-center justify-center gap-2 w-8 h-8 md:w-9 md:h-9 rounded-full transition-colors duration-150 text-[var(--muted)] hover:text-foreground hover:bg-[var(--card)]/10 focus:outline-none focus:ring-0"
                 >
                   {/* @ts-ignore */}
                   <link.Icon className="w-4 h-4" />
@@ -133,8 +133,10 @@ export default function Navbar() {
             </div>
 
             {/* Inline mobile controls (theme only) */}
-            <div className="flex items-center md:hidden gap-3 pr-2 border-r border-[var(--border)] mr-1">
-              <CompactClock />
+            <div className="flex items-center md:hidden gap-2 pr-1.5 border-r border-[var(--border)] mr-0.5">
+              <span className="hidden sm:inline-block">
+                <CompactClock />
+              </span>
               <button
                 onClick={() => {
                   const next = theme === "light" ? "dark" : "light";

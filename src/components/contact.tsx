@@ -2,7 +2,6 @@
 import { motion } from "framer-motion";
 import { Mail, ArrowRight } from "lucide-react";
 import { FaGithub, FaLinkedin, FaTwitter, FaWhatsapp } from "react-icons/fa";
-import Image from "next/image";
 
 export default function Contact() {
   const socialLinks = [
