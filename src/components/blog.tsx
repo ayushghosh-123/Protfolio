@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
-import { ExternalLink, Search, Sparkles, Loader, AlertCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search, Loader, AlertCircle, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -16,6 +16,14 @@ interface Blog {
   tags: string[];
   readTime: string;
   createdAt: string;
+}
+
+function formatDate(dateStr: string) {
+  const d = new Date(dateStr);
+  const month = d.toLocaleString("en-US", { month: "short" }).toUpperCase();
+  const day = String(d.getDate()).padStart(2, "0");
+  const year = String(d.getFullYear()).slice(2);
+  return `${month} ${day}, ${year}`;
 }
 
 export default function BlogSection() {
@@ -34,241 +42,186 @@ export default function BlogSection() {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch('/api/blogs');
-      if (!response.ok) {
-        throw new Error(`Failed to fetch blogs: ${response.statusText}`);
-      }
+      const response = await fetch("/api/blogs");
+      if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
       const data = await response.json();
       setBlogs(data.data || []);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load blogs');
+      setError(err instanceof Error ? err.message : "Failed to load blogs");
     } finally {
       setLoading(false);
     }
   };
 
-  const categories = ["ALL", ...Array.from(new Set(blogs.map(b => b.category.toUpperCase())))];
+  const categories = ["ALL", ...Array.from(new Set(blogs.map((b) => b.category.toUpperCase())))];
 
   const filteredBlogs = blogs.filter((blog) => {
-    const matchesCategory = activeCategory === "ALL" || blog.category.toUpperCase() === activeCategory;
-    const matchesSearch = 
-      blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      blog.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      blog.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    
+    const matchesCategory =
+      activeCategory === "ALL" || blog.category.toUpperCase() === activeCategory;
+    const q = searchQuery.toLowerCase();
+    const matchesSearch =
+      blog.title.toLowerCase().includes(q) ||
+      blog.summary.toLowerCase().includes(q) ||
+      blog.tags.some((t) => t.toLowerCase().includes(q));
     return matchesCategory && matchesSearch;
   });
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  };
-
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  };
-
   if (error) {
     return (
-      <section className="min-h-screen bg-[#0A0A0A] px-6 py-32 flex flex-col justify-center">
-        <div className="max-w-7xl mx-auto text-center w-full">
-          <div className="inline-flex items-center gap-3 bg-white/[0.03] border border-primary/50 rounded-2xl p-6 text-white mb-8">
-            <AlertCircle size={20} className="text-primary" />
-            <p className="font-bold uppercase tracking-tight">{error}</p>
-          </div>
-          <div>
-            <button
-              onClick={fetchBlogs}
-              className="px-8 py-3 bg-primary text-white font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white hover:text-black transition-all duration-300"
-            >
-              Try Again
-            </button>
-          </div>
+      <section className="bg-[var(--background)] px-6 py-24 flex flex-col items-center justify-center min-h-[40vh]">
+        <div className="flex items-center gap-3 border border-[var(--border)] rounded-2xl p-6 mb-6 text-[var(--foreground)]">
+          <AlertCircle size={18} className="text-[var(--accent)]" />
+          <p className="text-sm font-medium">{error}</p>
         </div>
+        <button
+          onClick={fetchBlogs}
+          className="px-6 py-2.5 text-xs font-bold uppercase tracking-widest border border-[var(--border)] rounded-full text-[var(--foreground)] hover:bg-[var(--card)] transition-colors"
+        >
+          Try Again
+        </button>
       </section>
     );
   }
 
   return (
-    <section className="min-h-screen bg-[var(--background)] text-[var(--foreground)] px-6 py-32 overflow-hidden relative">
-      {/* Decorative glows removed for clean editorial layout */}
+    <section className="bg-[var(--background)] text-[var(--foreground)] py-20 border-t border-[var(--border)]">
+      <div className="mx-auto max-w-3xl px-6">
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-8">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--card)] border border-[var(--border)] mb-8">
-              <Sparkles size={12} className="text-[var(--accent)]" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Journal</span>
-            </div>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-none font-serif">
-             Engineering Intelligence
+            <p className="text-[10px] uppercase tracking-widest text-[var(--muted)] mb-3">// BLOG</p>
+            <h2 className="text-3xl md:text-4xl font-bold font-serif leading-tight">
+              Writing &amp; Thoughts
             </h2>
           </div>
-          
-          {/* Breadcrumb back to Home if on the sub-page */}
+
+          {/* Sub-page back link */}
           {pathname !== "/" && (
-            <Link 
+            <Link
               href="/"
-              className="text-zinc-500 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2 px-4 py-2 rounded-full border border-white/5 hover:border-white/20 bg-white/[0.02]"
+              className="text-[var(--muted)] hover:text-[var(--foreground)] text-xs font-medium uppercase tracking-widest transition-colors flex items-center gap-1.5"
             >
-              ← Back to Home
+              ← Home
             </Link>
           )}
         </div>
 
-        {/* Search and Filters Bar */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-16 pb-8 border-b border-[var(--border)]">
-          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto overflow-x-auto no-scrollbar py-2">
-            {categories.map((category) => (
+        {/* Filters + Search */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-0 pb-6 border-b border-[var(--border)]">
+          {/* Category pills */}
+          <div className="flex flex-wrap items-center gap-2">
+            {categories.map((cat) => (
               <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 text-[10px] uppercase tracking-widest font-bold rounded-full border transition-all duration-200 ${
-                  activeCategory === category
-                    ? "bg-[var(--foreground)] border-[var(--foreground)] text-[var(--card)]"
-                    : "bg-transparent border-[var(--border)] text-[var(--muted)] hover:bg-[var(--card)]/40 hover:text-[var(--foreground)]"
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full border transition-all duration-200 ${
+                  activeCategory === cat
+                    ? "bg-[var(--foreground)] border-[var(--foreground)] text-[var(--background)]"
+                    : "border-[var(--border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--foreground)]/30"
                 }`}
               >
-                {category}
+                {cat}
               </button>
             ))}
           </div>
 
-            <div className="relative w-full md:w-80">
-            <span className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-zinc-500">
-              <Search size={16} />
-            </span>
+          {/* Search */}
+          <div className="relative w-full sm:w-56">
+            <Search
+              size={13}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--muted)] pointer-events-none"
+            />
             <input
               type="text"
-              placeholder="SEARCH ARTICLE..."
+              placeholder="Search…"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[var(--card)] border border-[var(--border)] rounded-full py-3 pl-12 pr-6 text-xs uppercase tracking-widest font-bold text-[var(--muted)] placeholder-[var(--muted)] focus:outline-none focus:border-[var(--accent)] transition-colors"
+              className="w-full bg-[var(--card)] border border-[var(--border)] rounded-full py-2 pl-8 pr-4 text-xs text-[var(--foreground)] placeholder-[var(--muted)] focus:outline-none focus:border-[var(--accent)] transition-colors"
             />
           </div>
         </div>
 
-        {/* Loading Skeletons */}
+        {/* Loading */}
         {loading && (
-          <div className="flex flex-col items-center justify-center py-40 gap-6">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-            >
-              <Loader size={48} className="text-primary" />
+          <div className="flex flex-col items-center justify-center py-32 gap-5">
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }}>
+              <Loader size={28} className="text-[var(--muted)]" />
             </motion.div>
-            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500">
-              Loading thoughts...
-            </span>
+            <span className="text-[10px] uppercase tracking-[0.3em] text-[var(--muted)]">Loading…</span>
           </div>
         )}
 
-        {/* Blogs Grid */}
+        {/* Blog List */}
         {!loading && (
           <AnimatePresence mode="popLayout">
             {filteredBlogs.length > 0 ? (
               <motion.div
-                key="blogs-grid"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+                key="list"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
               >
-                {filteredBlogs.map((blog) => {
-                  const blogDate = new Date(blog.createdAt).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric'
-                  }).toUpperCase();
+                {filteredBlogs.map((blog, index) => (
+                  <motion.a
+                    key={blog._id}
+                    href={blog.watchUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: index * 0.06 }}
+                    className="group flex gap-8 py-8 border-b border-[var(--border)] hover:bg-[var(--card)] hover:px-4 hover:rounded-xl transition-all duration-300 -mx-4 px-4"
+                  >
+                    {/* Left: date + read time */}
+                    <div className="hidden sm:flex flex-col items-start gap-1 min-w-[72px] pt-1">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted)] leading-none">
+                        {formatDate(blog.createdAt)}
+                      </span>
+                      <span className="text-[10px] uppercase tracking-wider text-[var(--muted)]/60 leading-none">
+                        {blog.readTime} read
+                      </span>
+                    </div>
 
-                  return (
-                    <motion.article
-                      key={blog._id}
-                      variants={cardVariants}
-                      className="group relative flex flex-col bg-[var(--card)] border border-[var(--border)] rounded-[1.5rem] p-6 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,0,0,0.04)]"
-                    >
-                      <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-[var(--border)] transition-all duration-500">
-                        <img
-                          src={blog.imageUrl}
-                          alt={blog.title}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          loading="lazy"
-                        />
-                          <div className="absolute top-4 left-4 bg-[var(--card)]/80 px-3 py-1 rounded-full border border-[var(--border)]">
-                            <span className="text-[var(--accent)] text-[9px] font-bold uppercase tracking-widest">
-                              {blog.category}
-                            </span>
-                          </div>
+                    {/* Right: category + title + summary */}
+                    <div className="flex-1 min-w-0">
+                      {/* Category pill */}
+                      <span className="inline-block mb-2 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest rounded border border-[var(--accent)]/40 text-[var(--accent)] bg-[var(--accent)]/5">
+                        {blog.category}
+                      </span>
+
+                      {/* Mobile: date */}
+                      <div className="sm:hidden text-[10px] uppercase tracking-wide text-[var(--muted)] mb-1">
+                        {formatDate(blog.createdAt)} · {blog.readTime} read
                       </div>
 
-                      <div className="flex items-center gap-4 text-[10px] font-bold tracking-widest text-zinc-500 mb-3">
-                        <span>{blogDate}</span>
-                        <span className="w-1 h-1 rounded-full bg-white/20" />
-                        <span className="flex items-center gap-1">
-                          <Sparkles size={10} className="text-primary" /> {blog.readTime}
-                        </span>
-                      </div>
-
-                      <h3 className="text-xl md:text-2xl font-bold mb-4 leading-tight tracking-tight group-hover:text-[var(--accent)] transition-colors font-serif">
+                      <h3 className="text-xl md:text-2xl font-bold font-serif leading-snug mb-2 group-hover:text-[var(--accent)] transition-colors duration-200">
                         {blog.title}
                       </h3>
-
-                      <p className="text-[var(--muted)] text-sm leading-relaxed mb-6 font-medium line-clamp-4">
+                      <p className="text-sm text-[var(--muted)] leading-relaxed line-clamp-2">
                         {blog.summary}
                       </p>
+                    </div>
 
-                      <div className="flex flex-wrap gap-2 mb-8 mt-auto">
-                        {blog.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest"
-                          >
-                            #{tag}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="mt-6">
-                        <a
-                          href={blog.watchUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-[var(--accent)] font-bold uppercase tracking-widest text-xs hover:underline"
-                        >
-                          <span>Read article</span>
-                          <ExternalLink size={14} />
-                        </a>
-                      </div>
-                    </motion.article>
-                  );
-                })}
+                    {/* Arrow icon */}
+                    <div className="hidden sm:flex items-center self-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-[var(--accent)]">
+                      <ArrowUpRight size={18} />
+                    </div>
+                  </motion.a>
+                ))}
               </motion.div>
             ) : (
               <motion.div
-                key="empty-state"
-                initial={{ opacity: 0, y: 10 }}
+                key="empty"
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="text-center py-32 border border-dashed border-white/10 rounded-3xl"
+                className="py-24 text-center border-b border-[var(--border)]"
               >
-                <p className="text-zinc-500 font-bold uppercase tracking-[0.2em] mb-4">
-                  No articles found
-                </p>
+                <p className="text-sm text-[var(--muted)] mb-5">No articles match your search.</p>
                 <button
-                  onClick={() => {
-                    setSearchQuery("");
-                    setActiveCategory("ALL");
-                  }}
-                  className="px-6 py-3 bg-primary text-white font-bold uppercase tracking-widest text-[10px] rounded-full hover:bg-white hover:text-black transition-all duration-300"
+                  onClick={() => { setSearchQuery(""); setActiveCategory("ALL"); }}
+                  className="px-5 py-2 text-[10px] font-bold uppercase tracking-widest border border-[var(--border)] rounded-full text-[var(--foreground)] hover:bg-[var(--card)] transition-colors"
                 >
                   Clear Filters
                 </button>
@@ -276,6 +229,7 @@ export default function BlogSection() {
             )}
           </AnimatePresence>
         )}
+
       </div>
     </section>
   );

@@ -27,16 +27,15 @@ export default function Contact() {
           <p className="text-[10px] uppercase tracking-widest text-[var(--muted)] mb-4">// contact</p>
 
           <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight mb-6 font-serif">
-            Let's build something intentional.
+            Let's Work Together
           </h2>
-
-          <p className="text-[var(--muted)] text-base md:text-lg mb-6 max-w-xl">
-            Send a short message or connect via any of the channels below — I typically respond within a few business days.
-          </p>
+          <h4 className="text-lg md:text-xl font-black tracking-tight leading-tight mb-6 font-serif"> 
+             Suggestion/Idea/Thought?
+          </h4>
 
           <div className="flex gap-4 mt-6">
             <a href="/contact" className="inline-flex items-center gap-3 rounded-full border border-[var(--border)] bg-[var(--card)] px-4 py-2 text-sm font-semibold hover:opacity-95">Work with me</a>
-            <a href="/resume.pdf" className="inline-flex items-center gap-3 rounded-full border border-[var(--border)] px-4 py-2 text-sm hover:bg-[var(--card)]">Download Resume</a>
+            <a href="https://drive.google.com/file/d/1H3wOjfFWLRCoVCw9RskE3c2228J_F5YX/view" className="inline-flex items-center gap-3 rounded-full border border-[var(--border)] px-4 py-2 text-sm hover:bg-[var(--card)]">Download Resume</a>
           </div>
         </motion.div>
 

@@ -123,16 +123,10 @@ export default function Projects() {
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--card)] border border-[var(--border)] mb-8">
-              <Layers size={12} className="text-[var(--accent)]" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Portfolio</span>
-            </div>
+
             <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-none mb-8">
-              Selected Works
+              Projects
             </h2>
-            <p className="text-[var(--muted)] text-lg md:text-xl font-medium leading-relaxed max-w-2xl">
-              A curated selection of digital products, prototypes, and experiments.
-            </p>
           </div>
 
         </div>
