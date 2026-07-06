@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { Sun, Moon, Star } from "lucide-react";
+import { Menu, X, Sun, Moon, Star, House, User, Toolbox, Briefcase, BookOpen, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -34,6 +33,26 @@ const LiveClock = () => {
   );
 };
 
+// Compact clock for mobile (HH:MM)
+const CompactClock = () => {
+  const [timeString, setTimeString] = useState("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, "0");
+      const mm = String(now.getMinutes()).padStart(2, "0");
+      setTimeString(`${hh}:${mm}`);
+    };
+
+    updateTime();
+    const id = setInterval(updateTime, 1000 * 30);
+    return () => clearInterval(id);
+  }, []);
+
+  return <span className="font-mono text-xs uppercase tracking-wider text-[var(--muted)] select-none">{timeString}</span>;
+};
+
 // Note: LiveClock removed to keep header minimal per design.
 
 export default function Navbar() {
@@ -50,15 +69,15 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Skills", href: "/skills" },
-    { name: "Projects", href: "/projects" },
-    { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/contact" },
+    { name: "Home", href: "/", Icon: House },
+    { name: "About", href: "/about", Icon: User },
+    { name: "Skills", href: "/skills", Icon: Toolbox },
+    { name: "Projects", href: "/projects", Icon: Briefcase },
+    { name: "Blog", href: "/blog", Icon: BookOpen },
+    { name: "Contact", href: "/contact", Icon: Mail },
   ];
 
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, setTheme } = useTheme();
 
   if (!mounted) return null;
 
@@ -80,11 +99,11 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`font-mono text-[12px] uppercase tracking-wider font-medium transition-all duration-200 px-3 py-1 rounded-full ${
-                    pathname === link.href ? "bg-[var(--foreground)] text-[var(--card)] shadow-sm" : "text-[var(--muted)] hover:text-foreground hover:bg-[var(--card)]/40"
-                  }`}
+                  aria-label={link.name}
+                  className="flex items-center justify-center gap-2 w-9 h-9 rounded-full transition-colors duration-150 text-[var(--muted)] hover:text-foreground hover:bg-[var(--card)]/10 focus:outline-none focus:ring-0"
                 >
-                  {link.name}
+                  {/* @ts-ignore */}
+                  <link.Icon className="w-4 h-4" />
                 </Link>
               ))}
             </div>
@@ -96,32 +115,44 @@ export default function Navbar() {
               <LiveClock />
               <button
                 onClick={() => {
-                  if (toggleTheme) {
+                  const next = theme === "light" ? "dark" : "light";
+                  if (setTheme) {
+                    setTheme(next as any);
+                  } else if (toggleTheme) {
                     toggleTheme();
-                    return;
+                  } else {
+                    document.documentElement.setAttribute("data-theme", next);
+                    localStorage.setItem("site-theme", next);
                   }
-
-                  const el = document.documentElement;
-                  const cur = el.getAttribute("data-theme") || "light";
-                  const next = cur === "light" ? "dark" : cur === "dark" ? "night" : "light";
-                  el.setAttribute("data-theme", next);
-                  localStorage.setItem("site-theme", next);
                 }}
                 className="p-1 rounded-md bg-transparent text-[var(--muted)] hover:text-foreground transition-colors"
                 aria-label="Toggle theme"
               >
-                {theme === "light" ? <Sun size={18} /> : theme === "dark" ? <Moon size={18} /> : <Star size={18} />}
+                {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
               </button>
             </div>
 
-            {/* Mobile Toggle inside capsule */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-foreground p-1 cursor-pointer"
-              aria-label="Open menu"
-            >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            {/* Inline mobile controls (theme only) */}
+            <div className="flex items-center md:hidden gap-3 pr-2 border-r border-[var(--border)] mr-1">
+              <CompactClock />
+              <button
+                onClick={() => {
+                  const next = theme === "light" ? "dark" : "light";
+                  if (setTheme) {
+                    setTheme(next as any);
+                  } else if (toggleTheme) {
+                    toggleTheme();
+                  } else {
+                    document.documentElement.setAttribute("data-theme", next);
+                    localStorage.setItem("site-theme", next);
+                  }
+                }}
+                className="p-1 rounded-md bg-transparent text-[var(--muted)] hover:text-foreground transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -136,16 +167,40 @@ export default function Navbar() {
             className="absolute top-20 left-1/2 -translate-x-1/2 w-[min(96%,40rem)] md:hidden bg-[var(--card)] border border-[var(--border)] rounded-xl p-6 shadow-sm pointer-events-auto"
           >
             <div className="flex flex-col gap-4 items-center">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="w-full text-center text-lg font-semibold uppercase tracking-tight text-foreground hover:text-[var(--accent)] transition-colors py-2"
-                >
-                  {link.name}
-                </Link>
-              ))}
+              <div className="w-full flex items-center justify-end gap-3 pb-3 mb-2 border-b border-[var(--border)]">
+                <button
+                  onClick={() => {
+                      const next = theme === "light" ? "dark" : "light";
+                      if (setTheme) {
+                        setTheme(next as any);
+                      } else if (toggleTheme) {
+                        toggleTheme();
+                      } else {
+                        document.documentElement.setAttribute("data-theme", next);
+                        localStorage.setItem("site-theme", next);
+                      }
+                    }}
+                    className="p-2 rounded-md bg-transparent text-[var(--muted)] hover:text-foreground transition-colors"
+                    aria-label="Toggle theme"
+                  >
+                  {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+                </button>
+              </div>
+              {/* only show the time */}
+              <LiveClock />
+              <div className="w-full flex flex-col gap-2 mt-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={`flex items-center gap-3 w-full px-4 py-2 rounded-lg transition-colors duration-150 ${pathname === link.href ? "bg-[var(--accent)]/10 text-[var(--accent)]" : "text-[var(--muted)] hover:text-foreground hover:bg-[var(--card)]/10"}`}
+                  >
+                    {/* @ts-ignore */}
+                    <link.Icon className="w-4 h-4" />
+                    <span className="font-medium">{link.name}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}

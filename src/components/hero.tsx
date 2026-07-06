@@ -11,7 +11,7 @@ export default function Hero() {
           <Image src="/Images/hero_image.jpeg" alt="Ayush" fill sizes="(max-width: 768px) 72px, 144px" className="object-cover" />
         </div>
 
-        <p className="mt-6 text-xs uppercase tracking-widest text-[var(--muted)]">NAMASTE, I'M</p>
+        <p className="mt-6 text-xs uppercase tracking-widest text-[var(--muted)]">Hallo, I'M</p>
 
         <motion.h1 initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="mt-4 text-4xl md:text-6xl font-black font-serif leading-tight">
           Ayush Ghosh
