@@ -32,12 +32,12 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-15 bg-[#0A0A0A] text-white">
+    <section id="services" className="py-15 bg-[#000000] text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="mb-24">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10 mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-none bg-white/[0.02] border border-[#222222] mb-8">
             <Cpu size={12} className="text-primary" />
-            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Solutions</span>
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500">// Solutions</span>
           </div>
           <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tight leading-none mb-8">
             AI & Automation <br />
@@ -56,10 +56,10 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.8 }}
-              className="group p-10 rounded-[2.5rem] glass border-white/10 hover:border-primary/50 transition-all duration-500 flex flex-col justify-between"
+              className="group p-10 rounded-none bg-[#111111] border border-[#222222] hover:border-primary/50 transition-all duration-500 flex flex-col justify-between"
             >
               <div>
-                <div className="w-16 h-16 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center mb-10 group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-500">
+                <div className="w-16 h-16 rounded-none bg-white/[0.02] border border-[#222222] flex items-center justify-center mb-10 group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-500">
                   {service.icon}
                 </div>
                 <h3 className="text-2xl font-bold uppercase tracking-tight mb-4">{service.title}</h3>
@@ -71,7 +71,7 @@ export default function Services() {
               <div className="flex flex-col gap-8">
                 <div className="flex flex-wrap gap-2">
                   {service.tags.map(tag => (
-                    <span key={tag} className="text-[9px] font-bold uppercase tracking-widest text-zinc-600 px-3 py-1 rounded-full border border-white/5">
+                    <span key={tag} className="text-[9px] font-bold uppercase tracking-widest text-zinc-500 px-3 py-1 rounded-none border border-white/5 bg-[#1a1a1a]">
                       {tag}
                     </span>
                   ))}

@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+
+
 
 const experiences = [
   {
@@ -22,62 +23,61 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-10 bg-[#0A0A0A] text-white overflow-hidden">
-      <div className="max-w-4xl mx-auto px-6 lg:px-12">
-        {/* Section Header */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold mb-12"
-        >
-          Work Experience
-        </motion.h2>
+    <section id="experience" className="py-12 bg-[var(--background)] text-[var(--foreground)]">
+      <div className="max-w-5xl mx-auto px-6 lg:px-12">
+        <div className="max-w-2xl mx-auto text-left">
+          <p className="text-[10px] uppercase tracking-widest text-[var(--muted)] mb-4">// EXPERIENCE</p>
 
-        {/* Experience List */}
-        <div className="space-y-6">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex items-center gap-4 group"
-            >
-              {/* Company Logo */}
-              <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden border border-white/10 relative flex-shrink-0 bg-[#1a1a1a]">
-                <Image
-                  src={exp.image}
-                  alt={exp.company}
-                  fill
-                  sizes="56px"
-                  className="object-contain"
-                />
-              </div>
+          <h2 className="text-2xl md:text-3xl font-black font-serif mb-6">Professional Experience</h2>
 
-              {/* Company Info */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-3 flex-wrap">
-                  <h3 className="text-base md:text-lg font-semibold text-white">
-                    {exp.company}
-                  </h3>
-                  {exp.badge && (
-                    <span className="px-2.5 py-0.5 text-[11px] font-medium rounded bg-white/10 text-zinc-300 border border-white/5">
-                      {exp.badge}
-                    </span>
-                  )}
+          <div className="space-y-8">
+            {experiences.map((exp, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                className="flex items-start gap-6"
+              >
+                {/* timeline marker */}
+                <div className="flex flex-col items-center mt-1">
+                  <span className="w-2 h-2 rounded-full bg-[var(--accent)] block" />
+                  {idx !== experiences.length - 1 && <span className="w-px bg-[var(--border)] h-full block mt-2" />}
                 </div>
-                <p className="text-sm text-zinc-400">{exp.role}</p>
-              </div>
 
-              {/* Date */}
-              <div className="text-sm text-zinc-500 flex-shrink-0 hidden sm:block">
-                {exp.period}
+                <div className="flex-1">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <h3 className="text-base font-semibold text-[var(--foreground)]">{exp.role} — <span className="font-normal">{exp.company}</span></h3>
+                      <p className="text-[13px] text-[var(--muted)] mt-1">{exp.period}</p>
+                    </div>
+
+                    <a href="#" className="text-sm font-bold text-[var(--accent)] uppercase tracking-wider hidden sm:inline">View More →</a>
+                  </div>
+
+                  <p className="mt-3 text-[14px] text-[var(--muted)]">Worked on building resilient systems and autonomous workflows, focusing on scalable architectures and clean integrations.</p>
+                </div>
+              </motion.div>
+            ))}
+
+            {/* GitHub contributions preview box (minimal) */}
+            <div className="mt-4 border border-[var(--border)] rounded-md bg-[var(--card)] p-4">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <p className="text-xs uppercase tracking-widest text-[var(--muted)] mb-3">// GITHUB CONTRIBUTIONS</p>
+                  <a href="https://github.com/ayushghosh-123" target="_blank" rel="noopener noreferrer" className="block w-full">
+                    <img
+                      src="https://ghchart.rshah.org/ayushghosh-123"
+                      alt="GitHub contributions chart for ayushghosh-123"
+                      className="w-full h-auto rounded-md shadow-sm"
+                      loading="lazy"
+                    />
+                  </a>
+                </div>
               </div>
-            </motion.div>
-          ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

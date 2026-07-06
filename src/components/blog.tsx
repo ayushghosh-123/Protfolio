@@ -98,21 +98,19 @@ export default function BlogSection() {
   }
 
   return (
-    <section className="min-h-screen bg-[#0A0A0A] text-white px-6 py-32 overflow-hidden relative">
-      {/* Background Decorative Glow */}
-      <div className="absolute top-1/3 -right-20 w-96 h-96 bg-primary/10 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/3 -left-20 w-96 h-96 bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
+    <section className="min-h-screen bg-[var(--background)] text-[var(--foreground)] px-6 py-32 overflow-hidden relative">
+      {/* Decorative glows removed for clean editorial layout */}
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-8">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10 mb-8">
-              <Sparkles size={12} className="text-primary" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Publications</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--card)] border border-[var(--border)] mb-8">
+              <Sparkles size={12} className="text-[var(--accent)]" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Journal</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-bold  tracking-tight leading-none">
-             Blog
+            <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-none font-serif">
+             Engineering Intelligence
             </h2>
           </div>
           
@@ -128,16 +126,16 @@ export default function BlogSection() {
         </div>
 
         {/* Search and Filters Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-16 pb-8 border-b border-white/5">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-16 pb-8 border-b border-[var(--border)]">
           <div className="flex flex-wrap items-center gap-3 w-full md:w-auto overflow-x-auto no-scrollbar py-2">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-5 py-2 text-[10px] uppercase tracking-widest font-bold rounded-full border transition-all duration-300 ${
+                className={`px-4 py-2 text-[10px] uppercase tracking-widest font-bold rounded-full border transition-all duration-200 ${
                   activeCategory === category
-                    ? "bg-primary border-primary text-white"
-                    : "bg-transparent border-white/10 text-zinc-400 hover:border-white hover:text-white"
+                    ? "bg-[var(--foreground)] border-[var(--foreground)] text-[var(--card)]"
+                    : "bg-transparent border-[var(--border)] text-[var(--muted)] hover:bg-[var(--card)]/40 hover:text-[var(--foreground)]"
                 }`}
               >
                 {category}
@@ -145,7 +143,7 @@ export default function BlogSection() {
             ))}
           </div>
 
-          <div className="relative w-full md:w-80">
+            <div className="relative w-full md:w-80">
             <span className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-zinc-500">
               <Search size={16} />
             </span>
@@ -154,7 +152,7 @@ export default function BlogSection() {
               placeholder="SEARCH ARTICLE..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white/[0.03] border border-white/10 rounded-full py-3 pl-12 pr-6 text-xs uppercase tracking-widest font-bold text-white placeholder-zinc-500 focus:outline-none focus:border-primary transition-colors"
+                className="w-full bg-[var(--card)] border border-[var(--border)] rounded-full py-3 pl-12 pr-6 text-xs uppercase tracking-widest font-bold text-[var(--muted)] placeholder-[var(--muted)] focus:outline-none focus:border-[var(--accent)] transition-colors"
             />
           </div>
         </div>
@@ -197,20 +195,20 @@ export default function BlogSection() {
                     <motion.article
                       key={blog._id}
                       variants={cardVariants}
-                      className="group relative flex flex-col glass border-white/10 hover:border-primary/50 rounded-[2rem] p-6 transition-all duration-500 hover:shadow-[0_0_50px_rgba(139,92,246,0.1)]"
+                      className="group relative flex flex-col bg-[var(--card)] border border-[var(--border)] rounded-[1.5rem] p-6 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,0,0,0.04)]"
                     >
-                      <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-white/5 grayscale group-hover:grayscale-0 transition-all duration-700">
+                      <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-[var(--border)] transition-all duration-500">
                         <img
                           src={blog.imageUrl}
                           alt={blog.title}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                           loading="lazy"
                         />
-                        <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
-                          <span className="text-primary text-[9px] font-bold uppercase tracking-widest">
-                            {blog.category}
-                          </span>
-                        </div>
+                          <div className="absolute top-4 left-4 bg-[var(--card)]/80 px-3 py-1 rounded-full border border-[var(--border)]">
+                            <span className="text-[var(--accent)] text-[9px] font-bold uppercase tracking-widest">
+                              {blog.category}
+                            </span>
+                          </div>
                       </div>
 
                       <div className="flex items-center gap-4 text-[10px] font-bold tracking-widest text-zinc-500 mb-3">
@@ -221,11 +219,11 @@ export default function BlogSection() {
                         </span>
                       </div>
 
-                      <h3 className="text-xl md:text-2xl font-bold uppercase mb-4 leading-tight tracking-tight group-hover:text-primary transition-colors">
+                      <h3 className="text-xl md:text-2xl font-bold mb-4 leading-tight tracking-tight group-hover:text-[var(--accent)] transition-colors font-serif">
                         {blog.title}
                       </h3>
 
-                      <p className="text-zinc-500 text-sm leading-relaxed mb-6 font-medium line-clamp-4">
+                      <p className="text-[var(--muted)] text-sm leading-relaxed mb-6 font-medium line-clamp-4">
                         {blog.summary}
                       </p>
 
@@ -233,22 +231,23 @@ export default function BlogSection() {
                         {blog.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest"
+                            className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest"
                           >
                             #{tag}
                           </span>
                         ))}
                       </div>
-
-                      <motion.a
-                        href={blog.watchUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-between w-full bg-white/[0.03] group-hover:bg-primary text-white hover:text-white px-6 py-4 rounded-2xl text-xs font-bold uppercase tracking-widest transition-all duration-500 border border-white/5 group-hover:border-primary"
-                      >
-                        <span>Watch / Read Blog</span>
-                        <ExternalLink size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                      </motion.a>
+                      <div className="mt-6">
+                        <a
+                          href={blog.watchUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-[var(--accent)] font-bold uppercase tracking-widest text-xs hover:underline"
+                        >
+                          <span>Read article</span>
+                          <ExternalLink size={14} />
+                        </a>
+                      </div>
                     </motion.article>
                   );
                 })}

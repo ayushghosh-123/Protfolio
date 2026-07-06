@@ -1,10 +1,10 @@
 "use client";
 
+import { FaBrain } from "react-icons/fa";
 import { 
   SiNextdotjs, 
   SiTypescript, 
   SiTailwindcss, 
-  SiOpenai, 
   SiLangchain, 
   SiDocker, 
   SiMongodb, 
@@ -16,7 +16,7 @@ import {
 
 const logos = [
   { icon: <SiNextdotjs size={32} />, name: "Next.js" },
-  { icon: <SiOpenai size={32} />, name: "OpenAI" },
+  { icon: <FaBrain size={32} />, name: "OpenAI" },
   { icon: <SiLangchain size={32} />, name: "LangChain" },
   { icon: <SiTypescript size={32} />, name: "TypeScript" },
   { icon: <SiDocker size={32} />, name: "Docker" },
@@ -29,7 +29,7 @@ const logos = [
 
 export default function TrustedLogos() {
   return (
-    <section className="py-20 bg-[#0A0A0A] overflow-hidden border-y border-white/[0.03]">
+    <section className="py-20 bg-[#000000] overflow-hidden border-y border-[#222222]">
       <div className="max-w-7xl mx-auto px-6 mb-12 flex justify-center">
         <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-600">Trusted Technologies</span>
       </div>

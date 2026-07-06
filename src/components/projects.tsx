@@ -118,20 +118,20 @@ export default function Projects() {
 
 
   return (
-    <section id="projects" className="py-32 bg-[#0A0A0A] text-white overflow-hidden">
+    <section id="projects" className="py-32 bg-[var(--background)] text-[var(--foreground)] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10 mb-8">
-              <Layers size={12} className="text-primary" />
-              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Portfolio</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--card)] border border-[var(--border)] mb-8">
+              <Layers size={12} className="text-[var(--accent)]" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)]">Portfolio</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tight leading-none mb-8">
-              My Projects
+            <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-none mb-8">
+              Selected Works
             </h2>
-            <p className="text-zinc-500 text-lg md:text-xl font-medium leading-relaxed max-w-2xl">
-              A curated collection of digital experiences, AI agents, and engineering solutions built for performance.
+            <p className="text-[var(--muted)] text-lg md:text-xl font-medium leading-relaxed max-w-2xl">
+              A curated selection of digital products, prototypes, and experiments.
             </p>
           </div>
 
@@ -151,7 +151,7 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative rounded-3xl border border-white bg-[#0D0D0D] p-6 lg:p-8 transition-all duration-500 hover:shadow-[0_0_80px_rgba(255,255,255,0.02)]"
+                className="group relative rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 lg:p-8 transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,0,0,0.04)]"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                   {/* Left Column: Content */}
@@ -159,7 +159,7 @@ export default function Projects() {
                     <div>
                       {/* Title & Year */}
                       <div className="flex justify-between items-start gap-4">
-                        <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-white group-hover:text-zinc-200 transition-colors">
+                        <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
                           {project.title}
                         </h3>
                       </div>
@@ -167,14 +167,14 @@ export default function Projects() {
                       {/* Tech Icons Row */}
                       <div className="flex flex-wrap items-center gap-4 mt-4">
                         {project.tags.map((tag) => (
-                          <div key={tag} className="flex items-center text-zinc-400 hover:text-white transition-colors">
+                          <div key={tag} className="flex items-center text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
                             <TechIcon tag={tag} />
                           </div>
                         ))}
                       </div>
 
                       {/* Description */}
-                      <p className="text-zinc-400 text-sm md:text-base font-normal leading-relaxed mt-6">
+                      <p className="text-[var(--muted)] text-sm md:text-base font-normal leading-relaxed mt-6">
                         {project.description}
                       </p>
                     </div>
@@ -186,7 +186,7 @@ export default function Projects() {
                           href={project.githubLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-black hover:bg-zinc-200 transition-colors text-xs md:text-sm font-bold shadow-md select-none"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--foreground)] text-[var(--card)] hover:opacity-95 transition-colors text-xs md:text-sm font-bold shadow-md select-none"
                         >
                           <FaGithub className="w-4 h-4" />
                           Code
@@ -197,7 +197,7 @@ export default function Projects() {
                           href={project.liveLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-black hover:bg-zinc-200 transition-colors text-xs md:text-sm font-bold shadow-md select-none"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--foreground)] text-[var(--card)] hover:opacity-95 transition-colors text-xs md:text-sm font-bold shadow-md select-none"
                         >
                           <ExternalLink className="w-4 h-4" />
                           Live
@@ -207,7 +207,7 @@ export default function Projects() {
                   </div>
 
                   {/* Right Column: Project Image Preview */}
-                  <div className="lg:col-span-5 relative w-full h-full min-h-[220px] lg:min-h-full aspect-[16/10] lg:aspect-auto rounded-2xl overflow-hidden border border-white/5 bg-zinc-900 shadow-2xl">
+                  <div className="lg:col-span-5 relative w-full h-full min-h-[220px] lg:min-h-full aspect-[16/10] lg:aspect-auto rounded-2xl overflow-hidden border border-[var(--border)] bg-[var(--card)] shadow-sm">
                     <Image
                       src={project.imageUrl}
                       alt={project.title}

@@ -58,23 +58,23 @@ export default function FeaturedProjects() {
     <section id="projects" className="py-24 bg-black text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Section Header */}
-        <div className="text-center mb-24">
+        <div className="text-left mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <span className="text-[#FF5722] font-black tracking-[0.3em] uppercase text-sm mb-4 block">
-              Portfolio
-            </span>
-            <h2 className="text-5xl md:text-7xl font-black uppercase">
-              Featured <span className="text-transparent" style={{ WebkitTextStroke: '1px white' }}>Projects</span>
-            </h2>
+              <span className="text-[var(--muted)] font-black tracking-[0.2em] uppercase text-sm mb-4 block">
+                // Projects
+              </span>
+              <h2 className="text-4xl md:text-6xl font-black">
+                Selected Works
+              </h2>
           </motion.div>
         </div>
 
         {/* Projects List */}
-        <div className="space-y-40">
+        <div className="space-y-24">
           {featuredProjects.map((project, index) => (
             <motion.div
               key={index}
@@ -82,7 +82,7 @@ export default function FeaturedProjects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-16 items-center`}
+              className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}
             >
               {/* Left: Project Preview Image */}
               <div className="w-full lg:w-3/5 relative group">
@@ -97,22 +97,22 @@ export default function FeaturedProjects() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
-                <span className="absolute -top-10 -left-4 text-8xl font-black text-white/5 select-none pointer-events-none">
+                <span className="absolute -top-8 -left-4 text-6xl font-black text-[var(--muted)]/40 select-none pointer-events-none">
                   0{index + 1}
                 </span>
               </div>
 
               {/* Right: Content */}
               <div className="w-full lg:w-2/5 flex flex-col items-start">
-                <span className="text-[#FF5722] text-xs font-black uppercase tracking-[0.2em] mb-4">
+                <span className="text-[var(--muted)] text-xs font-black uppercase tracking-[0.18em] mb-4">
                   {project.tag}
                 </span>
-                
-                <h3 className="text-4xl md:text-5xl font-black uppercase mb-6 leading-tight tracking-tighter">
+
+                <h3 className="text-3xl md:text-4xl font-black mb-4 leading-tight">
                   {project.title}
                 </h3>
-                
-                <p className="text-gray-400 text-lg mb-8 leading-relaxed font-medium">
+
+                <p className="text-[var(--muted)] text-base mb-6 leading-relaxed font-medium">
                   {project.description}
                 </p>
 

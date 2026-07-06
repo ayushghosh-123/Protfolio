@@ -1,72 +1,90 @@
+
 @import "tailwindcss";
+
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap'); */
 
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  
+  --font-serif: 'Playfair Display', serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  
   --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  
   --color-border: var(--border);
 }
 
 :root {
+  --background: #FBF7F5; /* soft cream */
+  --foreground: #111111; /* primary text */
+  --card: #FFFFFF;
+  --primary: #111111; /* headings / strong text */
+  --muted: #7C7C77; /* subtle muted */
+  --border: #E9E4E1; /* light border */
+  --accent: #2F6B5A; /* subtle green accent for tags */
+}
+
+/* Dark theme overrides */
+:root[data-theme="dark"], [data-theme="dark"] {
   --background: #0A0A0A;
-  --foreground: #FFFFFF;
-  --card: #121212;
-  --card-foreground: #FFFFFF;
-  --primary: #8B5CF6;
-  --primary-foreground: #FFFFFF;
-  --secondary: #1A1A1A;
-  --secondary-foreground: #FFFFFF;
-  --muted: #1A1A1A;
-  --muted-foreground: #A1A1AA;
-  --accent: #3B82F6;
-  --accent-foreground: #FFFFFF;
-  --border: rgba(255, 255, 255, 0.08);
+  --foreground: #E6E6E6;
+  --card: #0F0F0F;
+  --primary: #FFFFFF;
+  --muted: #9A9A9A;
+  --border: #1F1F1F;
+  --accent: #FF7043;
+}
+
+/* Night theme - deeper contrast, cooler hues */
+:root[data-theme="night"], [data-theme="night"] {
+  --background: #050608;
+  --foreground: #DDE6F2;
+  --card: #07090B;
+  --primary: #E6EEF8;
+  --muted: #94A3B8;
+  --border: #0F1724;
+  --accent: #7DD3FC;
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply box-border;
   }
+
+  html, body {
+    height: 100%;
+  }
+
   body {
-    @apply bg-background text-foreground selection:bg-primary/30 antialiased;
+    @apply bg-background text-foreground antialiased leading-relaxed transition-colors duration-300;
+    font-feature-settings: "rlig" 1, "kern" 1;
   }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif), Georgia, Cambria, "Times New Roman", serif;
+    color: var(--primary);
+    margin: 0 0 0.75rem 0;
+  }
+
+  p, li, a, span {
+    color: var(--foreground);
+  }
+
+  a { text-decoration: none; }
+  img { display: block; }
 }
 
 .glass {
-  @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] shadow-2xl;
+  @apply bg-white/60 backdrop-blur-sm border border-[var(--border)];
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#3B82F6];
-}
-
-.glow-mesh {
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.1) 0, transparent 50%);
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#111111] via-[#6b6b6b] to-[#111111];
 }
 
 .border-gradient {
   background: linear-gradient(var(--background), var(--background)) padding-box,
-              linear-gradient(to right, #8B5CF6, #3B82F6) border-box;
+              linear-gradient(90deg, rgba(0,0,0,0.06), rgba(0,0,0,0.06)) border-box;
   border: 1px solid transparent;
 }
 
@@ -75,10 +93,5 @@
   100% { transform: translateX(-50%); }
 }
 
-.animate-marquee {
-  animation: marquee 30s linear infinite;
-}
-
-.animate-marquee-slow {
-  animation: marquee 50s linear infinite;
-}
+.animate-marquee { animation: marquee 30s linear infinite; }
+.animate-marquee-slow { animation: marquee 50s linear infinite; }
