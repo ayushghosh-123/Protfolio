@@ -19,14 +19,14 @@ export default function Hero() {
         </motion.h1>
 
         <p className="mx-auto mt-6 max-w-xl text-[var(--muted)]">
-          Engineer/Artist - I love building , braking and shipping the thing
+          Engineer/Artist - I love building , breaking,  and shipping the thing
         </p>
         {/* add my social media icon based link here */}
         <div className="flex justify-center gap-5 mt-6">
-          <a href="https://github.com/ghoshayush777" className="text-[var(--muted)] hover:text-foreground transition-colors" aria-label="GitHub"><FaGithub size={24} /></a>
-          <a href="https://www.linkedin.com/in/ayush-ghosh-0a9b9b9b9" className="text-[var(--muted)] hover:text-foreground transition-colors" aria-label="LinkedIn"><FaLinkedin size={24} /></a>
-          <a href="https://twitter.com/ayushghosh777" className="text-[var(--muted)] hover:text-foreground transition-colors" aria-label="Twitter"><FaTwitter size={24} /></a>
-          <a href="https://open.spotify.com" className="text-[var(--muted)] hover:text-foreground transition-colors" aria-label="Spotify"><FaSpotify size={24} /></a>
+          <a href="https://github.com/ayushghosh-123" className="text-[var(--muted)] hover:text-foreground transition-colors" aria-label="GitHub"><FaGithub size={24} /></a>
+          <a href="https://www.linkedin.com/in/ayush-ghosh-9659772b0/" className="text-[var(--muted)] hover:text-foreground transition-colors" aria-label="LinkedIn"><FaLinkedin size={24} /></a>
+          <a href="https://x.com/AyushGhosh30804" className="text-[var(--muted)] hover:text-foreground transition-colors" aria-label="Twitter"><FaTwitter size={24} /></a>
+          <a href="https://open.spotify.com/user/31j5r7lq7bo5nea62cvxvfx7udoa" className="text-[var(--muted)] hover:text-foreground transition-colors" aria-label="Spotify"><FaSpotify size={24} /></a>
         </div>
       </div>
     </section>
