@@ -47,9 +47,9 @@ const TechIcon = ({ tag }: { tag: string }) => {
   const normalized = tag.toLowerCase().trim();
   switch (normalized) {
     case "nextjs":
-      return <SiNextdotjs className="w-5 h-5 text-white" title="Next.js" />;
+      return <SiNextdotjs className="w-5 h-5 text-[var(--foreground)]" title="Next.js" />;
     case "html":
-      return <SiHtml5 className="w-5 h-5 text-white" title="HTML5" />;
+      return <SiHtml5 className="w-5 h-5 text-orange-600" title="HTML5" />;
     case "css":
       return <FaCss className="w-5 h-5 text-blue-600" title="CSS" />;
     case "typescript":
@@ -84,15 +84,15 @@ const TechIcon = ({ tag }: { tag: string }) => {
     case "langgraph":
       return <SiLanggraph className="w-5 h-5 text-[#276EF1]" title="Langgraph" />;
     case "nodemailer":
-      return <MdEmail className="w-5 h-5 text-white" title="Nodemailer" />;
+      return <MdEmail className="w-5 h-5 text-[var(--foreground)]" title="Nodemailer" />;
     case "webhook":
-      return <MdOutlineWebhook className="w-5 h-5 text-white" title="Webhook" />;
+      return <MdOutlineWebhook className="w-5 h-5 text-[var(--foreground)]" title="Webhook" />;
     case "openai":
-      return <AiFillOpenAI className="w-5 h-5 text-white" title="OpenAI" />;
+      return <AiFillOpenAI className="w-5 h-5 text-[var(--foreground)]" title="OpenAI" />;
     case "google drive":
-      return <FaGoogleDrive className="w-5 h-5 text-white" title="Google Drive" />; 
+      return <FaGoogleDrive className="w-5 h-5 text-[var(--foreground)]" title="Google Drive" />; 
     case "paymentgateway":
-      return <RiSecurePaymentLine className="w-5 h-5 text-white" title="Payment Gateway" />;
+      return <RiSecurePaymentLine className="w-5 h-5 text-[var(--foreground)]" title="Payment Gateway" />;
     default:
       return (
         <span className="text-[10px] font-semibold text-zinc-400 px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 select-none">
