@@ -19,7 +19,7 @@ const experiences = [
     image: "/ExperienceImage/fiver.png",
     link: "https://www.fiverr.com",
     description:
-      "Delivering full-stack web applications and AI-powered solutions for clients worldwide. Projects span MERN stack apps, Next.js dashboards, LangChain/LangGraph integrations, and custom automation workflows — from concept to production deployment."
+      "Delivering full-stack web applications and AI-powered solutions for clients worldwide. Projects span MERN stack apps, Next.js dashboards, LangChain/LangGraph integrations, and custom automation workflows — from concept to production deployment. alredy 2 Project Delivered."
   }
 ];
 
