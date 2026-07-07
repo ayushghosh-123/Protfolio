@@ -145,7 +145,7 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 lg:p-8 transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,0,0,0.04)]"
+                className="group relative rounded-3xl border border-[var(--project-border)] bg-[var(--card)] p-6 lg:p-8 transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,0,0,0.04)]"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                   {/* Left Column: Content */}

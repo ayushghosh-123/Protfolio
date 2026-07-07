@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * SmoothScrollProvider
@@ -16,6 +16,7 @@ export default function SmoothScrollProvider({
   const targetY = useRef(0);
   const rafId = useRef<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
     // Only run on non-touch devices where smooth scroll makes sense
@@ -24,6 +25,8 @@ export default function SmoothScrollProvider({
       navigator.maxTouchPoints > 0;
 
     if (isTouchDevice) return;
+    
+    setEnabled(true);
 
     const container = containerRef.current;
     if (!container) return;
@@ -72,13 +75,17 @@ export default function SmoothScrollProvider({
   return (
     <div
       ref={containerRef}
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        willChange: "transform",
-      }}
+      style={
+        enabled
+          ? {
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              willChange: "transform",
+            }
+          : {}
+      }
     >
       {children}
     </div>

@@ -23,6 +23,7 @@
   --muted: #7C7C77; /* subtle muted */
   --border: #E9E4E1; /* light border */
   --accent: #2F6B5A; /* subtle green accent for tags */
+  --project-border: #111111; /* black in light mode */
 }
 
 /* Dark theme overrides */
@@ -34,6 +35,7 @@
   --muted: #9A9A9A;
   --border: #1F1F1F;
   --accent: #FF7043;
+  --project-border: #FFFFFF; /* white in dark mode */
 }
 
 /* Night theme - deeper contrast, cooler hues */
@@ -45,6 +47,7 @@
   --muted: #94A3B8;
   --border: #0F1724;
   --accent: #7DD3FC;
+  --project-border: #FFFFFF; /* white in dark mode */
 }
 
 @layer base {
