@@ -8,6 +8,7 @@ import SmoothScrollProvider from "@/components/smooth-scroll-provider";
 import ScrollProgressBar from "@/components/scroll-progress-bar";
 
 
+
 const onest = Onest({ variable: "--font-onest", subsets: ["latin"], display: "swap" });
 const figtree = Figtree({ variable: "--font-figtree", subsets: ["latin"], display: "swap" });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
