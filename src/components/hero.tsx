@@ -22,7 +22,7 @@ export default function Hero() {
           Full Stack & AI Agent Developer
         </motion.p>
         <p className="mx-auto mt-6 max-w-xl text-[var(--muted)]">
-          Engineer/Artist - I love building , breaking,  and shipping the thing
+          Engineer/Artist - I love building, breaking, and shipping things
         </p>
         {/* add my social media icon based link here */}
         <div className="flex justify-center gap-5 mt-6">

@@ -16,7 +16,7 @@ export default function About() {
         <h3 className="sr-only ">About</h3>
 
         <p className="text-[15px] leading-relaxed text-[var(--foreground)] mb-4">
-         Hey! I'm Ayush, a full-stack developer and AI engineer who loves building products that solve real-world problems. I enjoy taking ideas from a blank canvas to production, whether it's a modern web application, an AI-powered workflow, or an intelligent automation system
+         Hey! I'm Ayush, a full-stack developer and AI agent developer who loves building projects based on real-life issues. I enjoy taking ideas from a blank canvas to production, whether it's a modern web application, an AI-powered workflow, or an intelligent automation system. 
         </p>
 
         <p className="text-[14px] leading-relaxed text-[var(--muted)]">

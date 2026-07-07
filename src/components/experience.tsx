@@ -9,9 +9,8 @@ const experiences = [
     role: "Testing Trainee",
     period: "Sep 2024 – Nov 2024",
     image: "/ExperienceImage/EmpLife_Fed_Logo.png",
-    link: null,
     description:
-      "Completed 6-week XPro Program on Cybersecurity: API Testing with Employability.life and Federation University Australia Completed deliverables including API testing, documentation, incident response simulation & presentation. Proficient with Postman, cURL, and Splunk for API development & automation. Managed time efficiently while balancing obligations."
+      "Completed a 6-week XPro Program on Cybersecurity: API Testing in collaboration with Employability.life and Federation University Australia. Completed deliverables including API testing, documentation, incident response simulations, and final presentations. Proficient with Postman, cURL, and Splunk for API development and automation."
   },
   {
     company: "Freelancer (Fiverr)",
@@ -20,8 +19,7 @@ const experiences = [
     image: "/ExperienceImage/fiver.png",
     link: "https://www.fiverr.com",
     description:
-      "Delivering full-stack web applications and AI-powered solutions for clients worldwide. Projects span MERN stack apps, Next.js dashboards, LangChain/LangGraph integrations, and custom automation workflows — from concept to production deployment. Already 2 Projects Delivered."
-  }
+      "Building AI-based automation solutions that help clients grow their businesses using a modern, AI-integrated tech stack. I work transparently, collaborating closely with clients to build a trusted brand." }
 ];
 
 export default function Experience() {
