@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 import { ExternalLink, Layers, Loader2 } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import Image from "next/image";
-import { 
-  SiNextdotjs, 
-  SiTypescript, 
-  SiReact, 
-  SiTailwindcss, 
-  SiNodedotjs, 
-  SiMongodb, 
-  SiPostgresql, 
+import {
+  SiNextdotjs,
+  SiTypescript,
+  SiReact,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiMongodb,
+  SiPostgresql,
   SiSupabase,
   SiLangchain,
   SiLanggraph,
@@ -90,7 +90,7 @@ const TechIcon = ({ tag }: { tag: string }) => {
     case "openai":
       return <AiFillOpenAI className="w-5 h-5 text-[var(--foreground)]" title="OpenAI" />;
     case "google drive":
-      return <FaGoogleDrive className="w-5 h-5 text-[var(--foreground)]" title="Google Drive" />; 
+      return <FaGoogleDrive className="w-5 h-5 text-[var(--foreground)]" title="Google Drive" />;
     case "paymentgateway":
       return <RiSecurePaymentLine className="w-5 h-5 text-[var(--foreground)]" title="Payment Gateway" />;
     default:
@@ -123,10 +123,10 @@ export default function Projects() {
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
           <div className="max-w-3xl">
+            <p className="text-[10px] uppercase tracking-widest text-[var(--muted)] mb-4 font-bold">// PROJECTS</p>
 
-            <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-none mb-8">
-              Projects
-            </h2>
+            <h3 className="sr-only ">Projects</h3>
+
           </div>
 
         </div>

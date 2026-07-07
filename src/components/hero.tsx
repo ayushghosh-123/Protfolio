@@ -14,11 +14,11 @@ export default function Hero() {
 
         <p className="mt-6 text-xs uppercase tracking-widest text-[var(--muted)]">Hallo, I'M</p>
 
-        <motion.h1 initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="mt-4 text-4xl md:text-6xl font-black font-serif leading-tight">
+        <motion.h1 initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="mt-4 text-4xl md:text-6xl font-black font-sans leading-tight">
           Ayush Ghosh
         </motion.h1>
         {/* add my service */}
-        <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="mt-4 text-xl md:text-2xl font-black font-serif leading-tight">
+        <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="mt-4 text-xl md:text-2xl font-black font-sans leading-tight">
           Full Stack & AI Agent Developer
         </motion.p>
         <p className="mx-auto mt-6 max-w-xl text-[var(--muted)]">

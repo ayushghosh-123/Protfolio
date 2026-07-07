@@ -26,10 +26,10 @@ export default function Contact() {
         >
           <p className="text-[10px] uppercase tracking-widest text-[var(--muted)] mb-4">// contact</p>
 
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight mb-6 font-serif">
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight leading-tight mb-6 font-sans">
             Let's Work Together
           </h2>
-          <h4 className="text-lg md:text-xl font-black tracking-tight leading-tight mb-6 font-serif"> 
+          <h4 className="text-lg md:text-xl font-black tracking-tight leading-tight mb-6 font-sans"> 
              Suggestion/Idea/Thought?
           </h4>
 

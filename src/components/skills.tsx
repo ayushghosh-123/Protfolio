@@ -69,7 +69,7 @@ export default function Skills() {
         {/* Section Header */}
         <div className="mb-14">
           <p className="text-[10px] uppercase font-bold tracking-widest text-[var(--muted)] mb-4">// SKILLS</p>
-          <h2 className="text-2xl md:text-3xl font-bold font-serif">
+          <h2 className="text-2xl md:text-3xl font-bold font-sans">
             Technologies & Frameworks
           </h2>
         </div>

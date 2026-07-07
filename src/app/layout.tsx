@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Onest, Figtree, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
@@ -8,7 +8,8 @@ import SmoothScrollProvider from "@/components/smooth-scroll-provider";
 import ScrollProgressBar from "@/components/scroll-progress-bar";
 
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const onest = Onest({ variable: "--font-onest", subsets: ["latin"], display: "swap" });
+const figtree = Figtree({ variable: "--font-figtree", subsets: ["latin"], display: "swap" });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
+    <html lang="en" className={`${onest.variable} ${figtree.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
       <body className="bg-background text-white min-h-screen flex flex-col" suppressHydrationWarning>
         <ThemeProvider>
           <ScrollProgressBar />

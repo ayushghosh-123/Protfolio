@@ -91,7 +91,7 @@ export default function BlogSection() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
           <div>
             <p className="text-[10px] uppercase tracking-widest text-[var(--muted)] mb-3">// BLOG</p>
-            <h2 className="text-3xl md:text-4xl font-bold font-serif leading-tight">
+            <h2 className="text-3xl md:text-4xl font-bold font-sans leading-tight">
               Writing &amp; Thoughts
             </h2>
           </div>
@@ -195,7 +195,7 @@ export default function BlogSection() {
                         {formatDate(blog.createdAt)} · {blog.readTime} read
                       </div>
 
-                      <h3 className="text-xl md:text-2xl font-bold font-serif leading-snug mb-2 group-hover:text-[var(--accent)] transition-colors duration-200">
+                      <h3 className="text-xl md:text-2xl font-bold font-sans leading-snug mb-2 group-hover:text-[var(--accent)] transition-colors duration-200">
                         {blog.title}
                       </h3>
                       <p className="text-sm text-[var(--muted)] leading-relaxed line-clamp-2">

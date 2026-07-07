@@ -27,7 +27,7 @@ export default function Experience() {
     <section id="experience" className="py-16 bg-[var(--background)] text-[var(--foreground)] border-t border-[var(--border)]">
       <div className="max-w-3xl mx-auto px-6">
         <p className="text-[10px] uppercase font-bold tracking-widest text-[var(--muted)] mb-4">// EXPERIENCE</p>
-        <h4 className="text-xl md:text-xl font-serif mb-10">
+        <h4 className="text-xl md:text-xl font-sans mb-10">
           I love to work openly . It's gave me more opportunity to grow my technical and management skills.
           I believe that working in an open environment helps me to explore more and learn more.
         </h4>

@@ -5,7 +5,7 @@
 @import 'locomotive-scroll/dist/locomotive-scroll.css';
 
 @theme {
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-onest), var(--font-figtree), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
   --font-serif: 'Playfair Display', serif;
 
@@ -62,12 +62,12 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased leading-relaxed transition-colors duration-300;
+    @apply bg-background text-foreground antialiased leading-relaxed transition-colors duration-300 font-sans;
     font-feature-settings: "rlig" 1, "kern" 1;
   }
 
   h1, h2, h3, h4 {
-    font-family: var(--font-serif), Georgia, Cambria, "Times New Roman", serif;
+    font-family: var(--font-sans), system-ui, sans-serif;
     color: var(--primary);
     margin: 0 0 0.75rem 0;
   }

@@ -88,8 +88,8 @@ export default function Navbar() {
         <div className="w-full max-w-4xl inline-flex items-center justify-between gap-2 md:gap-4 bg-[var(--card)] border border-[var(--border)] rounded-full px-2 py-1.5 md:px-3 md:py-2 shadow-sm pointer-events-auto">
           {/* Left: small logo on capsule */}
           <div className="flex items-center gap-1.5 md:gap-3">
-            <Link href="/" className="hidden md:inline-block font-serif text-sm font-semibold tracking-tight text-foreground">Ayush Ghosh</Link>
-            <Link href="/" className="md:hidden font-serif text-base font-semibold tracking-tight text-foreground">AG</Link>
+            <Link href="/" className="hidden md:inline-block font-sans text-sm font-semibold tracking-tight text-foreground">Ayush Ghosh</Link>
+            <Link href="/" className="md:hidden font-sans text-base font-semibold tracking-tight text-foreground">AG</Link>
           </div>
 
           {/* Center: nav links inside capsule */}
