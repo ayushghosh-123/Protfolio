@@ -5,7 +5,7 @@ import { FaGithub, FaLinkedin, FaTwitter, FaWhatsapp } from "react-icons/fa";
 
 export default function Contact() {
   const socialLinks = [
-    { name: "Email", icon: <Mail size={20} />, href: "mailto:ghosyayush910@gmail.com" },
+    { name: "Email", icon: <Mail size={20} />, href: "mailto:ghoshayush910@gmail.com" },
     { name: "LinkedIn", icon: <FaLinkedin size={20} />, href: "https://www.linkedin.com/in/ayush-ghosh-9659772b0/" },
     { name: "GitHub", icon: <FaGithub size={20} />, href: "https://github.com/ayushghosh-123" },
     { name: "Twitter", icon: <FaTwitter size={20} />, href: "https://x.com/AyushGhosh30804" },

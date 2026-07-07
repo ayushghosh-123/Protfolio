@@ -11,7 +11,7 @@ const experiences = [
     image: "/ExperienceImage/EmpLife_Fed_Logo.png",
     link: null,
     description:
-      "Worked as a QA testing trainee, contributing to manual and exploratory testing of web-based platforms. Identified bugs, documented issues, and collaborated with the development team to ensure product quality and reliability."
+      "Completed 6-week XPro Program on Cybersecurity: API Testing with Employability.life and Federation University Australia Completed deliverables including API testing, documentation, incident response simulation & presentation. Proficient with Postman, cURL, and Splunk for API development & automation. Managed time efficiently while balancing obligations."
   },
   {
     company: "Freelancer (Fiverr)",
