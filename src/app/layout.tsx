@@ -4,6 +4,8 @@ import "./globals.css";
 import ThemeProvider from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import SmoothScrollProvider from "@/components/smooth-scroll-provider";
+import ScrollProgressBar from "@/components/scroll-progress-bar";
 
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -19,9 +21,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
       <body className="bg-background text-white min-h-screen flex flex-col" suppressHydrationWarning>
         <ThemeProvider>
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-          <Footer/>
+          <ScrollProgressBar />
+          <SmoothScrollProvider>
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+            <Footer/>
+          </SmoothScrollProvider>
         </ThemeProvider>
       </body>
     </html>

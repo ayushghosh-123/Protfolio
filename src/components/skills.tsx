@@ -31,97 +31,70 @@ import { FaGithub } from "react-icons/fa";
 // Simple inline React atom icon (minimal)
 // Using react-icons for recognizable icons
 
-const columns = [
-  {
-    title: "FRONT END",
-    items: [
-      { name: "React.js", icon: <FaReact className="w-5 h-5 text-[#61DAFB]" /> },
-      { name: "Next.js", icon: <SiNextdotjs className="w-5 h-5" /> },
-      { name: "Tailwind CSS", icon: <SiTailwindcss className="w-5 h-5" /> },
-      { name: "Framer Motion", icon: <SiFramer className="w-5 h-5" /> },
-      { name: "TypeScript", icon: <SiTypescript className="w-5 h-5 text-[#3178C6]" /> },
-      { name: "GSAP", icon: <SiGsap className="w-5 h-5" /> },
-    ],
-  },
-  {
-    title: "BACK END",
-    items: [
-      { name: "Node.js", icon: <SiNodedotjs className="w-5 h-5" /> },
-      { name: "MongoDB", icon: <SiMongodb className="w-5 h-5" /> },
-      { name: "PostgreSQL", icon: <SiPostgresql className="w-5 h-5" /> },
-      { name: "Firebase", icon: <SiFirebase className="w-5 h-5" /> },
-      { name: "Express.js", icon: <SiExpress className="w-5 h-5" /> },
-      { name: "Socket.io", icon: <SiSocketdotio className="w-5 h-5" /> },
-    ],
-  },
-  {
-    title : "AI Agents & LLMs",
-    items: [
-      { name: "OpenAI", icon: <BsOpenai className="w-5 h-5 text-[#61DAFB]" /> },
-      { name: "LangChain", icon: <SiLangchaincorporate className="w-5 h-5" /> },
-      { name: "LangGraph", icon: <SiLanggraph className="w-5 h-5" /> },
-      { name: "Ollama", icon: <SiOllama className="w-5 h-5" /> },
-      { name: "RAG", icon: <FaBrain className="w-5 h-5" /> },
-      { name: "Hugging Face", icon: <SiHuggingface className="w-5 h-5" /> },
-    ],
-  },
-  {
-    title: "DEPLOYMENT",
-    items: [
-      { name: "Vercel", icon: <SiVercel className="w-5 h-5" /> },
-      { name: "AWS", icon: <FaAws className="w-5 h-5" /> },
-      { name: "GitHub Actions", icon: <SiGithubactions className="w-5 h-5" /> },
-      { name: "Docker", icon: <SiDocker className="w-5 h-5" /> },
-      { name: "Octane Render", icon: <SiOctanerender className="w-5 h-5" /> },
-      { name: "GitHub", icon: <FaGithub className="w-5 h-5" /> },
-    ],
-  },
+const skillsList = [
+  // Front End
+  { name: "React.js", icon: <FaReact className="w-6 h-6 text-[#61DAFB]" />, category: "FRONT END" },
+  { name: "Next.js", icon: <SiNextdotjs className="w-6 h-6 text-[var(--foreground)]" />, category: "FRONT END" },
+  { name: "Tailwind CSS", icon: <SiTailwindcss className="w-6 h-6 text-[#06B6D4]" />, category: "FRONT END" },
+  { name: "Framer Motion", icon: <SiFramer className="w-6 h-6 text-[#00F0FF]" />, category: "FRONT END" },
+  { name: "TypeScript", icon: <SiTypescript className="w-6 h-6 text-[#3178C6]" />, category: "FRONT END" },
+  { name: "GSAP", icon: <SiGsap className="w-6 h-6 text-[#88CE02]" />, category: "FRONT END" },
+  // Back End
+  { name: "Node.js", icon: <SiNodedotjs className="w-6 h-6 text-[#339933]" />, category: "BACK END" },
+  { name: "MongoDB", icon: <SiMongodb className="w-6 h-6 text-[#47A248]" />, category: "BACK END" },
+  { name: "PostgreSQL", icon: <SiPostgresql className="w-6 h-6 text-[#4169E1]" />, category: "BACK END" },
+  { name: "Firebase", icon: <SiFirebase className="w-6 h-6 text-[#FFCA28]" />, category: "BACK END" },
+  { name: "Express.js", icon: <SiExpress className="w-6 h-6 text-[var(--foreground)]" />, category: "BACK END" },
+  { name: "Socket.io", icon: <SiSocketdotio className="w-6 h-6 text-[var(--foreground)]" />, category: "BACK END" },
+  // AI Agents & LLMs
+  { name: "OpenAI", icon: <BsOpenai className="w-6 h-6 text-[#74A57F]" />, category: "AI & LLMS" },
+  { name: "LangChain", icon: <SiLangchaincorporate className="w-6 h-6 text-[#1C3C3A]" />, category: "AI & LLMS" },
+  { name: "LangGraph", icon: <SiLanggraph className="w-6 h-6 text-[#00A3E0]" />, category: "AI & LLMS" },
+  { name: "Ollama", icon: <SiOllama className="w-6 h-6 text-[var(--foreground)]" />, category: "AI & LLMS" },
+  { name: "RAG", icon: <FaBrain className="w-6 h-6 text-[#FF6B6B]" />, category: "AI & LLMS" },
+  { name: "Hugging Face", icon: <SiHuggingface className="w-6 h-6 text-[#FFD21E]" />, category: "AI & LLMS" },
+  // Deployment
+  { name: "Vercel", icon: <SiVercel className="w-6 h-6 text-[var(--foreground)]" />, category: "DEPLOYMENT" },
+  { name: "AWS", icon: <FaAws className="w-6 h-6 text-[#FF9900]" />, category: "DEPLOYMENT" },
+  { name: "GitHub Actions", icon: <SiGithubactions className="w-6 h-6 text-[#2088FF]" />, category: "DEPLOYMENT" },
+  { name: "Docker", icon: <SiDocker className="w-6 h-6 text-[#2496ED]" />, category: "DEPLOYMENT" },
+  { name: "Octane Render", icon: <SiOctanerender className="w-6 h-6 text-[#FF5A00]" />, category: "DEPLOYMENT" },
+  { name: "GitHub", icon: <FaGithub className="w-6 h-6 text-[var(--foreground)]" />, category: "DEPLOYMENT" }
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-12 bg-[var(--background)] text-[var(--foreground)]">
+    <section id="skills" className="py-16 bg-[var(--background)] text-[var(--foreground)] border-t border-[var(--border)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
-          <div className="max-w-3xl">
-            <h2 className="text-4xl md:text-6xl font-black tracking-tight leading-none mb-8">
-              Skills
-            </h2>
-          </div>
+        <div className="mb-14">
+          <p className="text-[10px] uppercase font-bold tracking-widest text-[var(--muted)] mb-4">// SKILLS</p>
+          <h2 className="text-2xl md:text-3xl font-bold font-serif">
+            Technologies & Frameworks
+          </h2>
         </div>
 
-        {/* Card-style skill tiles (four columns) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {columns.map((col, i) => (
+        {/* Flat Grid of Pill-style Badges */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5">
+          {skillsList.map((skill, i) => (
             <motion.div
-              key={col.title}
+              key={skill.name}
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
-              className="group p-4 rounded-xl bg-[var(--card)] border border-[var(--border)] shadow-sm h-full flex flex-col"
+              transition={{ duration: 0.35, delay: i * 0.01 }}
+              whileHover={{ y: -1, scale: 1.01 }}
+              className="flex items-center gap-3 px-4 py-3.5 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:border-[var(--foreground)] transition-all duration-200"
             >
-              <h4 className="text-[11px] font-semibold uppercase tracking-wider text-[var(--muted)] mb-3">{col.title}</h4>
-
-              <ul className="mt-auto space-y-3">
-                {col.items.map((it) => (
-                  <li key={it.name} className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-white/[0.03] border border-[var(--border)] flex items-center justify-center text-[var(--accent)]">
-                      {it.icon}
-                    </div>
-
-                    <span className="text-sm font-medium text-[var(--foreground)]">{it.name}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="flex-shrink-0 flex items-center justify-center">
+                {skill.icon}
+              </div>
+              <span className="text-[13.5px] font-medium text-[var(--foreground)] tracking-tight">
+                {skill.name}
+              </span>
             </motion.div>
           ))}
         </div>
-
-        {/* Agentic AI & LLMs are included above in the columns */}
-
-        {/* Modern Marquee / Logos Section would go here */}
       </div>
     </section>
   );
