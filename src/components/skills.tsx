@@ -1,4 +1,5 @@
 "use client";
+import FadeUp from "@/components/fade-up";
 
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
@@ -67,29 +68,29 @@ export default function Skills() {
     <section id="skills" className="py-16 bg-[var(--background)] text-[var(--foreground)] border-t border-[var(--border)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Section Header */}
-        <div className="mb-14">
+        <FadeUp className="mb-12">
           <p className="text-[10px] uppercase font-bold tracking-widest text-[var(--muted)] mb-4">// SKILLS</p>
-          <h2 className="text-2xl md:text-3xl font-bold font-sans">
-            Technologies & Frameworks
+          <h2 className="text-[28px] md:text-[36px] font-bold tracking-tight">
+            Technologies &amp; Frameworks
           </h2>
-        </div>
+        </FadeUp>
 
         {/* Flat Grid of Pill-style Badges */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {skillsList.map((skill, i) => (
             <motion.div
               key={skill.name}
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: i * 0.01 }}
-              whileHover={{ y: -1, scale: 1.01 }}
-              className="flex items-center gap-3 px-4 py-3.5 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:border-[var(--foreground)] transition-all duration-200"
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.4, delay: i * 0.02, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -2, scale: 1.02 }}
+              className="flex items-center gap-3 px-4 py-4 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:border-[var(--foreground)]/50 hover:shadow-sm transition-all duration-200 cursor-default"
             >
               <div className="flex-shrink-0 flex items-center justify-center">
                 {skill.icon}
               </div>
-              <span className="text-[13.5px] font-medium text-[var(--foreground)] tracking-tight">
+              <span className="text-sm font-medium text-[var(--foreground)] tracking-tight">
                 {skill.name}
               </span>
             </motion.div>

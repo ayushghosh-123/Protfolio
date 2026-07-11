@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, Loader, AlertCircle, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import FadeUp from "@/components/fade-up";
 
 interface Blog {
   _id: string;
@@ -84,28 +85,30 @@ export default function BlogSection() {
   }
 
   return (
-    <section className="bg-[var(--background)] text-[var(--foreground)] py-20 border-t border-[var(--border)]">
+    <section className="bg-[var(--background)] text-[var(--foreground)] py-16 border-t border-[var(--border)]">
       <div className="mx-auto max-w-3xl px-6">
 
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
-          <div>
-            <p className="text-[10px] uppercase tracking-widest text-[var(--muted)] mb-3">// BLOG</p>
-            <h2 className="text-3xl md:text-4xl font-bold font-sans leading-tight">
-              Writing &amp; Thoughts
-            </h2>
-          </div>
+        <FadeUp className="mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+            <div>
+              <p className="text-[10px] uppercase tracking-widest text-[var(--muted)] mb-3">// BLOG</p>
+              <h2 className="text-[28px] md:text-[36px] font-bold tracking-tight leading-tight">
+                Writing &amp; Thoughts
+              </h2>
+            </div>
 
-          {/* Sub-page back link */}
-          {pathname !== "/" && (
-            <Link
-              href="/"
-              className="text-[var(--muted)] hover:text-[var(--foreground)] text-xs font-medium uppercase tracking-widest transition-colors flex items-center gap-1.5"
-            >
-              ← Home
-            </Link>
-          )}
-        </div>
+            {/* Sub-page back link */}
+            {pathname !== "/" && (
+              <Link
+                href="/"
+                className="text-[var(--muted)] hover:text-[var(--foreground)] text-xs font-medium uppercase tracking-widest transition-colors flex items-center gap-1.5 hover:gap-2.5"
+              >
+                ← Home
+              </Link>
+            )}
+          </div>
+        </FadeUp>
 
         {/* Filters + Search */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-0 pb-6 border-b border-[var(--border)]">

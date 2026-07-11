@@ -160,28 +160,28 @@ export default function AdminPage() {
           animate={{ opacity: 1, y: 0 }}
           className="w-full max-w-md bg-[#111] p-12 border border-white/5 relative"
         >
-          <div className="absolute inset-0 bg-[#FF5722]/5 -rotate-2 -z-10" />
+          <div className="absolute inset-0 bg-[#3B82F6]/5 -rotate-2 -z-10" />
           <div className="mb-12 text-center">
-            <span className="text-[#FF5722] font-black tracking-[0.4em] uppercase text-xs mb-4 block">Secure Access</span>
+            <span className="text-[#3B82F6] font-black tracking-[0.4em] uppercase text-xs mb-4 block">Secure Access</span>
             <h2 className="text-4xl font-black uppercase tracking-tighter">Admin <span className="text-transparent" style={{ WebkitTextStroke: '1px white' }}>Login</span></h2>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-10">
             <div className="space-y-2 group">
-              <label className="text-[10px] uppercase tracking-widest font-black text-gray-500 group-focus-within:text-[#FF5722] transition-colors">Master Password</label>
+              <label className="text-[10px] uppercase tracking-widest font-black text-gray-500 group-focus-within:text-[#3B82F6] transition-colors">Master Password</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors placeholder:text-gray-800 text-xl font-bold"
+                className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#3B82F6] transition-colors placeholder:text-gray-800 text-xl font-bold"
               />
-              {loginError && <p className="text-[#FF5722] text-[10px] font-black uppercase mt-2">Invalid Access Key</p>}
+              {loginError && <p className="text-[#3B82F6] text-[10px] font-black uppercase mt-2">Invalid Access Key</p>}
             </div>
 
             <button
               type="submit"
-              className="w-full py-6 bg-[#FF5722] text-white font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-black transition-all duration-500"
+              className="w-full py-6 bg-[#3B82F6] text-white font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-black transition-all duration-500"
             >
               Authorize
             </button>
@@ -198,7 +198,7 @@ export default function AdminPage() {
         {/* Toggle tabs and Title Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 border-b border-white/10 pb-8">
           <div>
-            <span className="text-[#FF5722] font-black tracking-[0.3em] uppercase text-sm mb-4 block">
+            <span className="text-[#3B82F6] font-black tracking-[0.3em] uppercase text-sm mb-4 block">
               Dashboard
             </span>
             <h1 className="text-5xl md:text-7xl font-black uppercase leading-none">
@@ -211,7 +211,7 @@ export default function AdminPage() {
             <button
               onClick={() => handleTabChange('project')}
               className={`px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${
-                activeTab === 'project' ? 'bg-[#FF5722] text-white' : 'text-gray-400 hover:text-white'
+                activeTab === 'project' ? 'bg-[#3B82F6] text-white' : 'text-gray-400 hover:text-white'
               }`}
             >
               Projects
@@ -219,7 +219,7 @@ export default function AdminPage() {
             <button
               onClick={() => handleTabChange('blog')}
               className={`px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${
-                activeTab === 'blog' ? 'bg-[#FF5722] text-white' : 'text-gray-400 hover:text-white'
+                activeTab === 'blog' ? 'bg-[#3B82F6] text-white' : 'text-gray-400 hover:text-white'
               }`}
             >
               Blogs
@@ -252,7 +252,7 @@ export default function AdminPage() {
                   name="title"
                   value={projectFormData.title}
                   onChange={handleProjectInputChange}
-                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors font-bold uppercase text-xl"
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#3B82F6] transition-colors font-bold uppercase text-xl"
                   placeholder="E.G. AI DASHBOARD"
                 />
               </div>
@@ -264,7 +264,7 @@ export default function AdminPage() {
                   name="description"
                   value={projectFormData.description}
                   onChange={handleProjectInputChange}
-                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors font-medium text-gray-400 resize-none"
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#3B82F6] transition-colors font-medium text-gray-400 resize-none"
                   placeholder="A brief overview of the project..."
                   rows={3}
                 />
@@ -277,7 +277,7 @@ export default function AdminPage() {
                     name="liveLink"
                     value={projectFormData.liveLink}
                     onChange={handleProjectInputChange}
-                    className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm"
+                    className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#3B82F6] transition-colors text-sm"
                     placeholder="https://..."
                   />
                 </div>
@@ -287,7 +287,7 @@ export default function AdminPage() {
                     name="githubLink"
                     value={projectFormData.githubLink}
                     onChange={handleProjectInputChange}
-                    className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm"
+                    className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#3B82F6] transition-colors text-sm"
                     placeholder="https://github.com/..."
                   />
                 </div>
@@ -299,7 +299,7 @@ export default function AdminPage() {
                   name="tags"
                   value={projectFormData.tags}
                   onChange={handleProjectInputChange}
-                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm uppercase tracking-widest"
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#3B82F6] transition-colors text-sm uppercase tracking-widest"
                   placeholder="REACT, NODE, NEXTJS"
                 />
               </div>
@@ -312,10 +312,10 @@ export default function AdminPage() {
                   onChange={(e) => setProjectFormData(prev => ({ ...prev, featured: e.target.checked }))}
                   className="hidden"
                 />
-                <div className={`w-6 h-6 border-2 transition-all flex items-center justify-center ${projectFormData.featured ? 'bg-[#FF5722] border-[#FF5722]' : 'border-white/20'}`}>
+                <div className={`w-6 h-6 border-2 transition-all flex items-center justify-center ${projectFormData.featured ? 'bg-[#3B82F6] border-[#3B82F6]' : 'border-white/20'}`}>
                   {projectFormData.featured && <CheckCircle2 size={16} className="text-white" />}
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-widest group-hover:text-[#FF5722] transition-colors">Mark as Featured Work</span>
+                <span className="text-[10px] font-black uppercase tracking-widest group-hover:text-[#3B82F6] transition-colors">Mark as Featured Work</span>
               </label>
             </div>
           ) : (
@@ -328,7 +328,7 @@ export default function AdminPage() {
                   name="title"
                   value={blogFormData.title}
                   onChange={handleBlogInputChange}
-                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors font-bold uppercase text-xl"
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#3B82F6] transition-colors font-bold uppercase text-xl"
                   placeholder="E.G. THE RISE OF AGENTIC AI"
                 />
               </div>
@@ -340,7 +340,7 @@ export default function AdminPage() {
                   name="summary"
                   value={blogFormData.summary}
                   onChange={handleBlogInputChange}
-                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors font-medium text-gray-400 resize-none"
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#3B82F6] transition-colors font-medium text-gray-400 resize-none"
                   placeholder="Write a clear, brief summary of what the reader learns..."
                   rows={4}
                 />
@@ -354,7 +354,7 @@ export default function AdminPage() {
                     name="category"
                     value={blogFormData.category}
                     onChange={handleBlogInputChange}
-                    className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm uppercase tracking-widest font-bold"
+                    className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#3B82F6] transition-colors text-sm uppercase tracking-widest font-bold"
                     placeholder="AI TOOLS, UI/UX, DEV"
                   />
                 </div>
@@ -365,7 +365,7 @@ export default function AdminPage() {
                     name="readTime"
                     value={blogFormData.readTime}
                     onChange={handleBlogInputChange}
-                    className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm font-bold"
+                    className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#3B82F6] transition-colors text-sm font-bold"
                     placeholder="5 MIN READ"
                   />
                 </div>
@@ -378,7 +378,7 @@ export default function AdminPage() {
                   name="watchUrl"
                   value={blogFormData.watchUrl}
                   onChange={handleBlogInputChange}
-                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm text-[#FF5722] font-semibold"
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#3B82F6] transition-colors text-sm text-[#3B82F6] font-semibold"
                   placeholder="https://youtu.be/..."
                 />
               </div>
@@ -389,7 +389,7 @@ export default function AdminPage() {
                   name="tags"
                   value={blogFormData.tags}
                   onChange={handleBlogInputChange}
-                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#FF5722] transition-colors text-sm uppercase tracking-widest"
+                  className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-[#3B82F6] transition-colors text-sm uppercase tracking-widest"
                   placeholder="AGENTICAI, DEVTOOLS, CODING"
                 />
               </div>
@@ -404,7 +404,7 @@ export default function AdminPage() {
               </label>
               <div 
                 className={`relative aspect-video border-2 border-dashed transition-all flex flex-col items-center justify-center gap-4 overflow-hidden group ${
-                  preview ? 'border-[#FF5722]/50' : 'border-white/10 hover:border-[#FF5722]/30'
+                  preview ? 'border-[#3B82F6]/50' : 'border-white/10 hover:border-[#3B82F6]/30'
                 }`}
               >
                 {preview ? (
@@ -413,14 +413,14 @@ export default function AdminPage() {
                     <button 
                       type="button"
                       onClick={() => { setImage(null); setPreview(null); }}
-                      className="absolute top-4 right-4 p-2 bg-black/80 text-white rounded-full hover:bg-[#FF5722] transition-colors"
+                      className="absolute top-4 right-4 p-2 bg-black/80 text-white rounded-full hover:bg-[#3B82F6] transition-colors"
                     >
                       <X size={16} />
                     </button>
                   </>
                 ) : (
                   <>
-                    <Upload size={32} className="text-gray-600 group-hover:text-[#FF5722] transition-colors" />
+                    <Upload size={32} className="text-gray-600 group-hover:text-[#3B82F6] transition-colors" />
                     <p className="text-[10px] font-black uppercase tracking-widest text-gray-500">Click to upload image</p>
                     <input
                       type="file"
@@ -436,7 +436,7 @@ export default function AdminPage() {
             <button
               disabled={loading}
               type="submit"
-              className="w-full py-6 bg-[#FF5722] text-white font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-black transition-all duration-500 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-6 bg-[#3B82F6] text-white font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-black transition-all duration-500 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <>

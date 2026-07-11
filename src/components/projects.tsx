@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ExternalLink, Layers, Loader2 } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import Image from "next/image";
+import FadeUp from "@/components/fade-up";
 import {
   SiNextdotjs,
   SiTypescript,
@@ -118,18 +119,13 @@ export default function Projects() {
 
 
   return (
-    <section id="projects" className="py-32 bg-[var(--background)] text-[var(--foreground)] overflow-hidden">
+    <section id="projects" className="py-16 bg-[var(--background)] text-[var(--foreground)] overflow-hidden border-t border-[var(--border)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-10">
-          <div className="max-w-3xl">
-            <p className="text-[10px] uppercase tracking-widest text-[var(--muted)] mb-4 font-bold">// PROJECTS</p>
-
-            <h3 className="sr-only ">Projects</h3>
-
-          </div>
-
-        </div>
+        <FadeUp className="mb-16">
+          <p className="text-[10px] uppercase tracking-widest text-[var(--muted)] mb-4 font-bold">// PROJECTS</p>
+          <h2 className="text-[28px] md:text-[36px] font-bold tracking-tight text-[var(--foreground)]">Projects</h2>
+        </FadeUp>
 
         {/* Projects Layout */}
         {loading ? (
@@ -137,15 +133,15 @@ export default function Projects() {
             <Loader2 className="animate-spin text-primary" size={40} />
           </div>
         ) : (
-          <div className="flex flex-col gap-8 lg:gap-12">
+          <div className="flex flex-col gap-8">
             {projects.map((project, idx) => (
               <motion.div
                 key={project._id}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative rounded-3xl border border-[var(--project-border)] bg-[var(--card)] p-6 lg:p-8 transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,0,0,0.04)]"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative rounded-2xl border border-[var(--project-border)] bg-[var(--card)] p-6 lg:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                   {/* Left Column: Content */}
@@ -153,7 +149,7 @@ export default function Projects() {
                     <div>
                       {/* Title & Year */}
                       <div className="flex justify-between items-start gap-4">
-                        <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
+                        <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors duration-200">
                           {project.title}
                         </h3>
                       </div>
@@ -168,7 +164,7 @@ export default function Projects() {
                       </div>
 
                       {/* Description */}
-                      <p className="text-[var(--muted)] text-sm md:text-base font-normal leading-relaxed mt-6">
+                      <p className="text-[var(--muted)] text-base font-normal leading-[1.6] mt-6">
                         {project.description}
                       </p>
                     </div>
@@ -191,7 +187,7 @@ export default function Projects() {
                           href={project.liveLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--foreground)] text-[var(--card)] hover:opacity-95 transition-colors text-xs md:text-sm font-bold shadow-md select-none"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--foreground)] text-[var(--card)] hover:opacity-90 hover:scale-[1.03] active:scale-[0.97] transition-all duration-150 text-xs md:text-sm font-bold shadow-sm select-none"
                         >
                           <ExternalLink className="w-4 h-4" />
                           Live
