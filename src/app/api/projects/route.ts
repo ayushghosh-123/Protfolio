@@ -1,18 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server';
-import connectDB from '@/lib/mongoose';
+import connectDB, { isMongoConnected } from '@/lib/mongoose';
 import Project from '@/models/Project';
 
 export async function GET(request: NextRequest) {
   try {
-    // Connect to MongoDB
-    await connectDB();
+    const db = await connectDB();
 
-    // Fetch all projects, sorted by creation date (newest first)
-    const projects = await Project.find({})
-      .sort({ createdAt: -1 })
-      .select('title description longDescription imageUrl tags liveLink githubLink featured createdAt');
+    if (!db || !isMongoConnected()) {
+      return NextResponse.json(
+        {
+          success: true,
+          data: [],
+          count: 0,
+          message: 'MongoDB is unavailable. Returning an empty project list.',
+        },
+        { status: 200 }
+      );
+    }
 
-    // Return projects with success status
+    let projects;
+    try {
+      projects = await Project.find({})
+        .sort({ createdAt: -1 })
+        .select('title description longDescription imageUrl tags liveLink githubLink featured createdAt');
+    } catch (queryError) {
+      console.error('Project query failed:', queryError);
+      return NextResponse.json(
+        {
+          success: true,
+          data: [],
+          count: 0,
+          message: 'MongoDB query failed. Returning an empty project list.',
+        },
+        { status: 200 }
+      );
+    }
+
     return NextResponse.json(
       {
         success: true,

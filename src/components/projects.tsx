@@ -69,7 +69,6 @@ const TechIcon = ({ tag }: { tag: string }) => {
       return <SiNodedotjs className="w-5 h-5 text-[#339933]" title="Node.js" />;
     case "mongodb":
       return <SiMongodb className="w-5 h-5 text-[#47A248]" title="MongoDB" />;
-    case "postgresql":
     case "postgres":
       return <SiPostgresql className="w-5 h-5 text-[#4169E1]" title="PostgreSQL" />;
     case "supabase":

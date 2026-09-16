@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/theme-provider";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 import SmoothScrollProvider from "@/components/smooth-scroll-provider";
-import ScrollProgressBar from "@/components/scroll-progress-bar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -93,16 +90,26 @@ export const metadata: Metadata = {
   },
 };
 
+import MultipageNavbar from "@/components/dossier/multipage-navbar";
+import SecretUploadModal from "@/components/dossier/secret-upload-modal";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
-      <body className="bg-background text-foreground min-h-screen flex flex-col" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${inter.variable} ${geistMono.variable} antialiased`}
+      data-theme="dark"
+      suppressHydrationWarning
+    >
+      <body
+        className="bg-background text-foreground min-h-screen flex flex-col font-mono selection:bg-[#4BC16B]/20 selection:text-[#4BC16B]"
+        suppressHydrationWarning
+      >
         <ThemeProvider>
-          <ScrollProgressBar />
           <SmoothScrollProvider>
-            <Navbar />
-            <main className="flex-grow">{children}</main>
-            <Footer />
+            <MultipageNavbar />
+            <main className="flex-grow pt-12">{children}</main>
+            <SecretUploadModal />
           </SmoothScrollProvider>
         </ThemeProvider>
       </body>

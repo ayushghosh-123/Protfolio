@@ -1,14 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server';
-import connectDB from '@/lib/mongoose';
+import connectDB, { isMongoConnected } from '@/lib/mongoose';
 import Blog from '@/models/Blog';
 
 export async function GET(request: NextRequest) {
   try {
-    // Connect to database
-    await connectDB();
+    const db = await connectDB();
 
-    // Fetch all blogs sorted newest first
-    const blogs = await Blog.find({}).sort({ createdAt: -1 });
+    if (!db || !isMongoConnected()) {
+      return NextResponse.json(
+        {
+          success: true,
+          data: [],
+          count: 0,
+          message: 'MongoDB is unavailable. Returning an empty blog list.',
+        },
+        { status: 200 }
+      );
+    }
+
+    let blogs;
+    try {
+      blogs = await Blog.find({}).sort({ createdAt: -1 });
+    } catch (queryError) {
+      console.error('Blog query failed:', queryError);
+      return NextResponse.json(
+        {
+          success: true,
+          data: [],
+          count: 0,
+          message: 'MongoDB query failed. Returning an empty blog list.',
+        },
+        { status: 200 }
+      );
+    }
 
     return NextResponse.json(
       {

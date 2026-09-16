@@ -11,7 +11,11 @@ const cached: MongooseConn = {
   promise: null,
 };
 
-async function connectDB(): Promise<Mongoose> {
+export function isMongoConnected(): boolean {
+  return mongoose.connection.readyState === 1;
+}
+
+async function connectDB(): Promise<Mongoose | null> {
   // If already connected, return cached connection
   if (cached.conn) {
     console.log('Using cached MongoDB connection');
@@ -29,7 +33,8 @@ async function connectDB(): Promise<Mongoose> {
   const mongoUri = process.env.MONGODB_URI;
 
   if (!mongoUri) {
-    throw new Error('MONGODB_URI environment variable is not defined');
+    console.warn('MONGODB_URI environment variable is not defined. Skipping MongoDB connection.');
+    return null;
   }
 
   cached.promise = mongoose.connect(mongoUri, {
@@ -46,7 +51,7 @@ async function connectDB(): Promise<Mongoose> {
   } catch (error) {
     cached.promise = null;
     console.error('❌ Failed to connect to MongoDB:', error);
-    throw error;
+    return null;
   }
 }
 
