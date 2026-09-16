@@ -6,6 +6,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { Upload, X, CheckCircle2, AlertCircle, Loader2, ArrowUpRight } from "lucide-react";
 
+function createDefaultBlogImage(): File {
+  const byteCharacters = atob(
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+  );
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+  const byteArray = new Uint8Array(byteNumbers);
+  return new File([byteArray], "dispatch_cover.png", { type: "image/png" });
+}
+
 export default function SecretUploadModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [password, setPassword] = useState("");
@@ -96,12 +108,12 @@ export default function SecretUploadModal() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!imageFile) {
-      setStatusMessage({ type: "error", text: "Cover image file is required." });
-      return;
-    }
 
     if (activeTab === "project") {
+      if (!imageFile) {
+        setStatusMessage({ type: "error", text: "Cover image file is required for projects." });
+        return;
+      }
       if (!projectTitle.trim() || !projectDescription.trim()) {
         setStatusMessage({ type: "error", text: "Title and short description are required." });
         return;
@@ -117,9 +129,9 @@ export default function SecretUploadModal() {
     setStatusMessage(null);
 
     const formData = new FormData();
-    formData.append("image", imageFile);
 
     if (activeTab === "project") {
+      if (imageFile) formData.append("image", imageFile);
       formData.append("title", projectTitle.trim());
       formData.append("description", projectDescription.trim());
       formData.append("longDescription", projectLongDesc.trim());
@@ -128,6 +140,11 @@ export default function SecretUploadModal() {
       formData.append("githubLink", projectGithubLink.trim());
       formData.append("featured", String(projectFeatured));
     } else {
+      if (imageFile) {
+        formData.append("image", imageFile);
+      } else {
+        formData.append("image", createDefaultBlogImage());
+      }
       formData.append("title", blogTitle.trim());
       formData.append("summary", blogSummary.trim());
       formData.append("category", blogCategory.trim());
@@ -155,7 +172,7 @@ export default function SecretUploadModal() {
 
       setStatusMessage({
         type: "success",
-        text: `${activeTab === "project" ? "Project" : "Blog post"} successfully committed to MongoDB & ImageKit!`,
+        text: `${activeTab === "project" ? "Project" : "Blog dispatch"} successfully committed to MongoDB!`,
       });
 
       // Reset form
@@ -175,9 +192,13 @@ export default function SecretUploadModal() {
       }
       clearImage();
 
-      // Notify project sections to re-fetch live data
+      // Notify relevant sections to re-fetch live data
       if (typeof window !== "undefined") {
-        window.dispatchEvent(new CustomEvent("projects-updated"));
+        if (activeTab === "project") {
+          window.dispatchEvent(new CustomEvent("projects-updated"));
+        } else {
+          window.dispatchEvent(new CustomEvent("blogs-updated"));
+        }
       }
     } catch (err) {
       setStatusMessage({
@@ -526,39 +547,46 @@ export default function SecretUploadModal() {
                     </>
                   )}
 
-                  {/* Common Cover Image Field */}
-                  <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-[var(--text-tertiary)] mb-1">
-                      Cover Media (ImageKit) *
-                    </label>
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/png,image/jpeg,image/webp,image/gif"
-                      required={!imageFile}
-                      onChange={handleFileChange}
-                      className="w-full text-[11px] text-[var(--text-tertiary)] file:mr-3 file:py-1 file:px-2.5 file:rounded file:border file:border-[var(--hairline)] file:bg-[var(--surface-subtle)] file:text-[var(--text-primary)] file:font-mono file:text-[11px] hover:file:border-[#4BC16B] cursor-pointer"
-                    />
+                  {/* Cover Image Field (Projects Only) */}
+                  {activeTab === "project" ? (
+                    <div>
+                      <label className="block text-[10px] uppercase tracking-wider text-[var(--text-tertiary)] mb-1">
+                        Cover Media (ImageKit) *
+                      </label>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp,image/gif"
+                        required={!imageFile}
+                        onChange={handleFileChange}
+                        className="w-full text-[11px] text-[var(--text-tertiary)] file:mr-3 file:py-1 file:px-2.5 file:rounded file:border file:border-[var(--hairline)] file:bg-[var(--surface-subtle)] file:text-[var(--text-primary)] file:font-mono file:text-[11px] hover:file:border-[#4BC16B] cursor-pointer"
+                      />
 
-                    {imagePreview && (
-                      <div className="relative w-full h-32 mt-2 rounded border border-[var(--hairline)] overflow-hidden bg-[var(--bg)] group">
-                        <Image
-                          src={imagePreview}
-                          alt="Cover Preview"
-                          fill
-                          className="object-cover"
-                        />
-                        <button
-                          type="button"
-                          onClick={clearImage}
-                          className="absolute top-2 right-2 p-1 rounded bg-black/70 text-white hover:text-red-400 hover:bg-black transition-colors"
-                          title="Remove image"
-                        >
-                          <X size={14} />
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                      {imagePreview && (
+                        <div className="relative w-full h-32 mt-2 rounded border border-[var(--hairline)] overflow-hidden bg-[var(--bg)] group">
+                          <Image
+                            src={imagePreview}
+                            alt="Cover Preview"
+                            fill
+                            className="object-cover"
+                          />
+                          <button
+                            type="button"
+                            onClick={clearImage}
+                            className="absolute top-2 right-2 p-1 rounded bg-black/70 text-white hover:text-red-400 hover:bg-black transition-colors"
+                            title="Remove image"
+                          >
+                            <X size={14} />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="p-2.5 rounded border border-[var(--hairline)] bg-[var(--bg)] text-[11px] text-[var(--text-tertiary)] flex items-center gap-2">
+                      <span className="text-[#4BC16B]">✔</span>
+                      <span>Direct link dispatch — no picture upload needed. Your dispatch will link directly to the destination URL.</span>
+                    </div>
+                  )}
 
                   {/* Actions Footer */}
                   <div className="flex items-center justify-between pt-3 border-t border-[var(--hairline)]">

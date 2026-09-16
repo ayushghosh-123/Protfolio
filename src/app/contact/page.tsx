@@ -30,13 +30,7 @@ const CHANNELS = [
     value: "@AyushGhosh30804",
     href: "https://x.com/AyushGhosh30804",
     desc: "Thoughts on Agentic AI, system architectures, and rapid shipping.",
-  },
-  {
-    name: "Spotify",
-    value: "Ayush Ghosh on Spotify",
-    href: "https://open.spotify.com/user/31j5r7lq7bo5nea62cvxvfx7udoa",
-    desc: "Deep focus playlists and ambient electronic music.",
-  },
+  }
 ];
 
 export default function ContactPage() {

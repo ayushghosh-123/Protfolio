@@ -13,7 +13,6 @@ const LINKS: NavLink[] = [
   { label: "GitHub", href: "https://github.com/ayushghosh-123" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/ayush-ghosh-9659772b0/" },
   { label: "Twitter", href: "https://x.com/AyushGhosh30804" },
-  { label: "Spotify", href: "https://open.spotify.com/user/31j5r7lq7bo5nea62cvxvfx7udoa" },
 ];
 
 export default function HeroSection() {

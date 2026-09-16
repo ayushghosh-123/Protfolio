@@ -46,6 +46,18 @@ interface ApiBlogItem {
   createdAt?: string;
 }
 
+function createDefaultBlogImage(): File {
+  const byteCharacters = atob(
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+  );
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+  const byteArray = new Uint8Array(byteNumbers);
+  return new File([byteArray], "dispatch_cover.png", { type: "image/png" });
+}
+
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
@@ -296,6 +308,9 @@ export default function AdminPage() {
       setStatusMessage({ type: "success", text: "Blog dispatch deleted from database." });
       if (blogId === id) resetBlogForm();
       fetchVaultBlogs();
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("blogs-updated"));
+      }
     } catch (err) {
       setStatusMessage({
         type: "error",
@@ -312,7 +327,8 @@ export default function AdminPage() {
     const isProject = activeTab === "project";
     const isUpdate = isProject ? Boolean(projectId) : Boolean(blogId);
 
-    if (!isUpdate && !imageFile) {
+    // Only projects require an image cover from the user
+    if (isProject && !isUpdate && !imageFile) {
       setStatusMessage({ type: "error", text: "Please select an image cover." });
       return;
     }
@@ -321,11 +337,11 @@ export default function AdminPage() {
     setStatusMessage(null);
 
     const formData = new FormData();
-    if (imageFile) {
-      formData.append("image", imageFile);
-    }
 
     if (isProject) {
+      if (imageFile) {
+        formData.append("image", imageFile);
+      }
       if (isUpdate) formData.append("id", projectId);
       formData.append("title", projectTitle.trim());
       formData.append("description", projectDescription.trim());
@@ -335,6 +351,12 @@ export default function AdminPage() {
       formData.append("githubLink", projectGithubLink.trim());
       formData.append("featured", String(projectFeatured));
     } else {
+      // Blogs do not require an image from the user; provide default image for route validation
+      if (imageFile) {
+        formData.append("image", imageFile);
+      } else if (!isUpdate) {
+        formData.append("image", createDefaultBlogImage());
+      }
       if (isUpdate) formData.append("id", blogId);
       formData.append("title", blogTitle.trim());
       formData.append("summary", blogSummary.trim());
@@ -372,6 +394,9 @@ export default function AdminPage() {
         } else {
           resetBlogForm();
           fetchVaultBlogs();
+          if (typeof window !== "undefined") {
+            window.dispatchEvent(new CustomEvent("blogs-updated"));
+          }
         }
       } else {
         throw new Error(result.error || "Operation failed");
@@ -817,39 +842,46 @@ export default function AdminPage() {
                 </>
               )}
 
-              {/* Cover Image Upload */}
-              <div>
-                <label className="block text-[10px] uppercase tracking-wider text-[var(--text-tertiary)] mb-1">
-                  Cover Photo {isEditing ? "(Optional: leave as is to keep existing)" : "* (ImageKit)"}
-                </label>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/png,image/jpeg,image/webp,image/gif"
-                  required={!isEditing && !imagePreview}
-                  onChange={handleImageChange}
-                  className="w-full text-[11px] text-[var(--text-tertiary)] file:mr-3 file:py-1 file:px-2.5 file:rounded file:border file:border-[var(--hairline)] file:bg-[var(--surface-subtle)] file:text-[var(--text-primary)] file:font-mono file:text-[11px] hover:file:border-[#4BC16B] cursor-pointer"
-                />
+              {/* Cover Image Upload (Projects Only) */}
+              {activeTab === "project" ? (
+                <div>
+                  <label className="block text-[10px] uppercase tracking-wider text-[var(--text-tertiary)] mb-1">
+                    Cover Photo {isEditing ? "(Optional: leave as is to keep existing)" : "* (ImageKit)"}
+                  </label>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp,image/gif"
+                    required={!isEditing && !imagePreview}
+                    onChange={handleImageChange}
+                    className="w-full text-[11px] text-[var(--text-tertiary)] file:mr-3 file:py-1 file:px-2.5 file:rounded file:border file:border-[var(--hairline)] file:bg-[var(--surface-subtle)] file:text-[var(--text-primary)] file:font-mono file:text-[11px] hover:file:border-[#4BC16B] cursor-pointer"
+                  />
 
-                {imagePreview && (
-                  <div className="relative w-full h-40 mt-2 rounded border border-[var(--hairline)] overflow-hidden bg-[var(--bg)] group">
-                    <Image
-                      src={imagePreview}
-                      alt="Cover Preview"
-                      fill
-                      className="object-cover"
-                    />
-                    <button
-                      type="button"
-                      onClick={clearImage}
-                      className="absolute top-2 right-2 p-1.5 rounded bg-black/75 text-white hover:text-red-400 hover:bg-black transition-colors cursor-pointer"
-                      title="Clear photo"
-                    >
-                      <X size={14} />
-                    </button>
-                  </div>
-                )}
-              </div>
+                  {imagePreview && (
+                    <div className="relative w-full h-40 mt-2 rounded border border-[var(--hairline)] overflow-hidden bg-[var(--bg)] group">
+                      <Image
+                        src={imagePreview}
+                        alt="Cover Preview"
+                        fill
+                        className="object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={clearImage}
+                        className="absolute top-2 right-2 p-1.5 rounded bg-black/75 text-white hover:text-red-400 hover:bg-black transition-colors cursor-pointer"
+                        title="Clear photo"
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="p-3 rounded border border-[var(--hairline)] bg-[var(--bg)] text-[11px] text-[var(--text-tertiary)] flex items-center gap-2">
+                  <span className="text-[#4BC16B]">✔</span>
+                  <span>Direct link dispatch — no picture upload required. The link will be provided directly on the blog page.</span>
+                </div>
+              )}
 
               {/* Action Buttons */}
               <div className="flex items-center justify-between pt-4 border-t border-[var(--hairline)] gap-2">
@@ -1032,16 +1064,6 @@ export default function AdminPage() {
                     }`}
                   >
                     <div className="flex gap-3 items-start">
-                      {item.imageUrl && (
-                        <div className="relative w-14 h-14 rounded overflow-hidden border border-[var(--hairline)] shrink-0 bg-[var(--surface)]">
-                          <Image
-                            src={item.imageUrl}
-                            alt={item.title}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                      )}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1.5 flex-wrap">
                           <h3 className="text-[13px] font-semibold text-[var(--text-primary)] truncate">
@@ -1051,7 +1073,7 @@ export default function AdminPage() {
                             {item.category}
                           </span>
                         </div>
-                        <p className="text-[11px] text-[var(--text-secondary)] line-clamp-1 mt-0.5 font-sans">
+                        <p className="text-[11px] text-[var(--text-secondary)] line-clamp-2 mt-1 font-sans">
                           {item.summary}
                         </p>
                       </div>

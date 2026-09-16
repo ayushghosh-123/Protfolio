@@ -16,7 +16,7 @@ const TECH_DATA: TechRow[] = [
   },
   {
     category: "Backend & APIs",
-    items: "Node.js, Express.js, Socket.io, RESTful APIs, WebSockets",
+    items: "Node.js, Express.js, Socket.io, RESTful APIs, WebSockets, Redis , Nginix",
   },
   {
     category: "AI & LLMs",
