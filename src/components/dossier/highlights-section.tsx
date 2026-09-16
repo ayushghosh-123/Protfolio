@@ -12,7 +12,7 @@ const HIGHLIGHTS = [
 export default function HighlightsSection() {
   return (
     <section className="mb-14">
-      <SectionHeader number="04" label="HIGHLIGHTS" />
+      <SectionHeader number="03" label="HIGHLIGHTS" />
 
       <ul className="space-y-3 font-sans text-[14px] sm:text-[15px] leading-[1.65] text-[var(--text-secondary)]">
         {HIGHLIGHTS.map((item, index) => (

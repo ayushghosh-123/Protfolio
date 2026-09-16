@@ -3,7 +3,7 @@ import SectionHeader from "./section-header";
 export default function GithubSection() {
   return (
     <section className="mb-14">
-      <SectionHeader number="03" label="GITHUB CONTRIBUTIONS" />
+      <SectionHeader number="02" label="GITHUB CONTRIBUTIONS" />
 
       <div className="space-y-4">
         {/* Heatmap Container */}

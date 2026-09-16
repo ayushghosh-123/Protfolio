@@ -10,7 +10,7 @@ const CERTIFICATIONS = [
 export default function CertificationsSection() {
   return (
     <section className="mb-14">
-      <SectionHeader number="07" label="CERTIFICATIONS" />
+      <SectionHeader number="06" label="CERTIFICATIONS" />
 
       <ul className="space-y-3 font-sans text-[14px] sm:text-[15px] leading-[1.65] text-[var(--text-secondary)]">
         {CERTIFICATIONS.map((item, idx) => (

@@ -3,7 +3,7 @@ import SectionHeader from "./section-header";
 export default function EducationSection() {
   return (
     <section className="mb-20">
-      <SectionHeader number="08" label="EDUCATION" />
+      <SectionHeader number="07" label="EDUCATION" />
 
       <div className="space-y-1">
         <p className="font-mono text-[15px] font-semibold text-[var(--text-primary)]">

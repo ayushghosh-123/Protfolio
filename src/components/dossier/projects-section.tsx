@@ -171,7 +171,7 @@ export default function ProjectsSection() {
     <section id="projects" className="mb-14">
       {/* Section Header */}
       <div className="mb-2">
-        <SectionHeader number="06" label="PROJECTS" className="mb-0" />
+        <SectionHeader number="05" label="PROJECTS" className="mb-0" />
       </div>
 
       <div className="flex items-center justify-between font-mono text-[11px] text-[var(--text-tertiary)] mb-4">

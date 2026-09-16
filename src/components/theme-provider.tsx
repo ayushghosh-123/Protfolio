@@ -4,32 +4,67 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "dark" | "light";
 
-const ThemeContext = createContext<{
+interface ThemeContextType {
   theme: Theme;
   setTheme: (t: Theme) => void;
   toggleTheme: () => void;
-}>({ theme: "dark", setTheme: () => {}, toggleTheme: () => {} });
+}
+
+const ThemeContext = createContext<ThemeContextType>({
+  theme: "dark",
+  setTheme: () => {},
+  toggleTheme: () => {},
+});
 
 export function useTheme() {
   return useContext(ThemeContext);
 }
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window === "undefined") return "dark";
-    const stored = localStorage.getItem("site-theme");
-    return stored === "light" ? "light" : "dark";
-  });
+  const [theme, setThemeState] = useState<Theme>("dark");
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("site-theme", theme);
-  }, [theme]);
+    // Read from localStorage on client mount
+    try {
+      const stored = localStorage.getItem("site-theme") as Theme | null;
+      if (stored === "light" || stored === "dark") {
+        setThemeState(stored);
+        applyTheme(stored);
+      } else {
+        // Default to dark
+        setThemeState("dark");
+        applyTheme("dark");
+      }
+    } catch {
+      applyTheme("dark");
+    }
+  }, []);
 
-  const setTheme = (t: Theme) => setThemeState(t);
+  const applyTheme = (t: Theme) => {
+    const root = document.documentElement;
+    root.setAttribute("data-theme", t);
+    if (t === "dark") {
+      root.classList.add("dark");
+      root.classList.remove("light");
+    } else {
+      root.classList.add("light");
+      root.classList.remove("dark");
+    }
+  };
+
+  const setTheme = (t: Theme) => {
+    setThemeState(t);
+    applyTheme(t);
+    try {
+      localStorage.setItem("site-theme", t);
+    } catch {
+      // Safe fallback if storage unavailable
+    }
+  };
 
   const toggleTheme = () => {
-    setThemeState((prev) => (prev === "dark" ? "light" : "dark"));
+    const nextTheme: Theme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
   };
 
   return (

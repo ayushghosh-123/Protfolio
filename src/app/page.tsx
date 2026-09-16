@@ -23,37 +23,32 @@ export default function Home() {
           <TechStackSection />
         </SectionWrapper>
 
-        {/* [ 02 ] Companies */}
-        <SectionWrapper delay={0.05}>
-          <CompaniesSection />
-        </SectionWrapper>
-
-        {/* [ 03 ] GitHub Heatmap */}
+        {/* [ 02 ] GitHub Heatmap */}
         <SectionWrapper delay={0.05}>
           <GithubSection />
         </SectionWrapper>
 
-        {/* [ 04 ] Highlights */}
+        {/* [ 03 ] Highlights */}
         <SectionWrapper delay={0.05}>
           <HighlightsSection />
         </SectionWrapper>
 
-        {/* [ 05 ] Industry Experience */}
+        {/* [ 04 ] Industry Experience */}
         <SectionWrapper delay={0.05}>
           <ExperienceSection />
         </SectionWrapper>
 
-        {/* [ 06 ] Projects */}
+        {/* [ 05 ] Projects */}
         <SectionWrapper delay={0.05}>
           <ProjectsSection />
         </SectionWrapper>
 
-        {/* [ 07 ] Achievements */}
+        {/* [ 06 ] Achievements */}
         <SectionWrapper delay={0.05}>
           <AchievementsSection />
         </SectionWrapper>
 
-        {/* [ 08 ] Education */}
+        {/* [ 07 ] Education */}
         <SectionWrapper delay={0.05}>
           <EducationSection />
         </SectionWrapper>

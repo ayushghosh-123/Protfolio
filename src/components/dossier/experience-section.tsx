@@ -59,7 +59,7 @@ const EXPERIENCES: ExperienceItem[] = [
 export default function ExperienceSection() {
   return (
     <section className="mb-14">
-      <SectionHeader number="05" label="INDUSTRY EXPERIENCE" />
+      <SectionHeader number="04" label="INDUSTRY EXPERIENCE" />
 
       <div className="space-y-12">
         {EXPERIENCES.map((exp) => (
