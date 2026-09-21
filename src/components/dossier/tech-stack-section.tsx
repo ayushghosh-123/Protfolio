@@ -26,6 +26,10 @@ const TECH_DATA: TechRow[] = [
     category: "Databases & DevOps",
     items: "MongoDB, PostgreSQL, Firebase, Docker, AWS, Vercel, GitHub Actions",
   },
+  {
+    category: "CMS",
+    items: "WordPress , SalesForce",
+  },
 ];
 
 export default function TechStackSection() {
