@@ -3,8 +3,8 @@ import SectionHeader from "./section-header";
 const CERTIFICATIONS = [
   "Cybersecurity: API Testing Certification — Employability.life & Federation University Australia (XPro Program).",
   "Agentic AI & LLM Workflow Architecture — LangChain & LangGraph Engineering.",
-  "Full-Stack Web Development & Modern MERN Stack Certification.",
-  "API Testing & Automated Security Incident Simulation — Postman & Splunk.",
+  "Data Structure and Algorithms - Coursera .",
+  "Design Thinking for Business - Coursera .",
 ];
 
 export default function CertificationsSection() {

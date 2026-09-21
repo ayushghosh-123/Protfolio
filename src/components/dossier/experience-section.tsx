@@ -54,6 +54,26 @@ const EXPERIENCES: ExperienceItem[] = [
       "REST APIs",
     ],
   },
+  {
+    company: "CoreMacasia Private Limited",
+    dateRange: "Aug 2026 — Present",
+    location: "Remote, India",
+    role: "WordPress Developer",
+    summary: "Building websites for clients using WordPress.",
+    bullets: [
+      "Collaborate with our design and content teams to implement new features and Enhancements.",
+      " Troubleshoot and debug issues to ensure seamless functionality of WordPress sites.",
+      "Optimize websites for speed, performance, and SEO best practices.",
+      "Stay up-to-date on the latest trends and technologies in WordPress development.",
+      "Assist in maintaining and updating existing WordPress sites.",
+      "Provide support and training to team members on WordPress best practices."
+    ],
+    techChips: [
+      "WordPress Developer",
+      "Php"
+    
+    ],
+  }
 ];
 
 export default function ExperienceSection() {
