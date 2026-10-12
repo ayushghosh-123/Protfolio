@@ -56,7 +56,7 @@ const EXPERIENCES: ExperienceItem[] = [
   },
   {
     company: "CoreMacasia Private Limited",
-    dateRange: "Aug 2026 — oct 2026",
+    dateRange: "Aug 2026 — Oct 2026",
     location: "Remote, India",
     role: "WordPress Developer",
     summary: "Building websites for clients using WordPress.",
