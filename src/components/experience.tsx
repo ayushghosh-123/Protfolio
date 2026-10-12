@@ -21,7 +21,8 @@ const experiences = [
     link: "https://www.fiverr.com",
     description:
       "Building AI-based automation solutions that help clients grow their businesses using a modern, AI-integrated tech stack. I work transparently, collaborating closely with clients to build a trusted brand.",
-  },
+  }
+
 ];
 
 export default function Experience() {
