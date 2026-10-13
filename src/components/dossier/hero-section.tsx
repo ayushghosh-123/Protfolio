@@ -12,7 +12,7 @@ const LINKS: NavLink[] = [
   { label: "Email", href: "mailto:ghoshayush910@gmail.com" },
   { label: "GitHub", href: "https://github.com/ayushghosh-123" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/ayush-ghosh-9659772b0/" },
-  { label: "Twitter", href: "https://x.com/AyushGhosh30804" },
+  { label: "Twitter", href: "https://x.com/Specdev3084" },
 ];
 
 export default function HeroSection() {
