@@ -28,7 +28,7 @@ const CHANNELS = [
   {
     name: "Twitter / X",
     value: "@AyushGhosh30804",
-    href: "https://x.com/AyushGhosh30804",
+    href: "https://x.com/Specdev3084",
     desc: "Thoughts on Agentic AI, system architectures, and rapid shipping.",
   }
 ];
